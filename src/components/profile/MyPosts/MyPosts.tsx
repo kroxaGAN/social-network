@@ -9,6 +9,14 @@ export const MyPosts = () => {
         {id: 2, message: 'It\'s first commit', countLikes: 25},
         {id: 3, message: 'Yeee', countLikes: 1},
     ]
+
+    let postsElements=postsData.map(posts =>
+         <Post
+            key={posts.id}
+            message={posts.message}
+            countLikes={posts.countLikes}
+        />
+    )
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
@@ -18,15 +26,7 @@ export const MyPosts = () => {
                 </div>
                 <button>Add new post</button>
             </div>
-            {
-                postsData.map(posts => {
-                    return <Post
-                        key={posts.id}
-                        message={posts.message}
-                        countLikes={posts.countLikes}
-                    />
-                })
-            }
+            {postsElements}
         </div>
     )
 }
