@@ -9,9 +9,11 @@
 padding: 10px;
 }
 .dialog{
-
 }
-.active{
+.dialog a {
+    text-decoration: none;
+}
+.dialog a.active{
     color:gold;
 }
 .messages{
