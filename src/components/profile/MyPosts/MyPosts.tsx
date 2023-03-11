@@ -4,18 +4,30 @@ import {Post} from "./Post/Post";
 
 
 export const MyPosts = () => {
+    let postsData = [
+        {id: 1, message: 'Hello my friend', countLikes: 15},
+        {id: 2, message: 'It\'s first commit', countLikes: 25},
+        {id: 3, message: 'Yeee', countLikes: 1},
+    ]
     return (
-            <div className={s.postsBlock}>
-               <h3>My posts</h3>
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <div>
                 <div>
-                    <div>
-                        <textarea>!!!</textarea>
-                    </div>
-                    <button>Add new post</button>
+                    <textarea>!!!</textarea>
                 </div>
-                <Post message={"Hello my friend"} countLikes={15}/>
-                <Post message={"It's first commit"} countLikes={20}/>
-                <Post message={"Yeee"} countLikes={1}/>
+                <button>Add new post</button>
             </div>
-    )}
+            {
+                postsData.map(posts => {
+                    return <Post
+                        key={posts.id}
+                        message={posts.message}
+                        countLikes={posts.countLikes}
+                    />
+                })
+            }
+        </div>
+    )
+}
 
