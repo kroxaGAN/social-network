@@ -6,7 +6,8 @@ export type PostType={
     id: number, message: string, countLikes: number
 }
 type MyPostsProps={
-    posts:PostType[]
+    posts:PostType[],
+    addPost:(postMessage:string)=>void
 }
 
 
@@ -24,7 +25,9 @@ export const MyPosts = (props:MyPostsProps) => {
     const addPost=()=>{
         // const inputData:any=document.getElementById('new-post')?.value
         console.log(newPostElement.current?.value)
-
+        if (newPostElement.current?.value){
+            props.addPost(newPostElement.current?.value)
+        }
     }
     return (
         <div className={s.postsBlock}>
@@ -33,7 +36,6 @@ export const MyPosts = (props:MyPostsProps) => {
                 <div>
                     <textarea
                         ref={newPostElement}
-                        onChange={addPost}
                     >add post</textarea>
 
                 </div>
