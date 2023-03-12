@@ -21,7 +21,6 @@ export const MyPosts = (props:MyPostsProps) => {
     )
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
-    debugger
     const addPost=()=>{
         // const inputData:any=document.getElementById('new-post')?.value
         console.log(newPostElement.current?.value)

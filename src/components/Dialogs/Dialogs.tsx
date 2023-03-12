@@ -1,6 +1,7 @@
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import React from "react";
 
 export type DialogType = {
     id: number, name: string, avatar:string
@@ -23,6 +24,11 @@ export const Dialogs = (props: DialogsPropsType) => {
     let messagesElement = props.state.messages.map((m) =>
         <Message key={m.id} message={m.message}/>
     )
+    let newMessageTextarea=React.createRef<HTMLTextAreaElement>()
+    const addNewMessageHandler=()=>{
+        let message=newMessageTextarea.current?.value
+        alert(message)
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
@@ -33,6 +39,13 @@ export const Dialogs = (props: DialogsPropsType) => {
                 <h3>Messages</h3>
                 <div className={s.messages}>
                     {messagesElement}
+                    <div>
+                        <textarea
+                            ref={newMessageTextarea}
+                            onChange={addNewMessageHandler}
+                        >new message</textarea>
+                    </div>
+                    <button>Add message</button>
                 </div>
             </div>
         </div>
