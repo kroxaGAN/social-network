@@ -3,12 +3,13 @@
     display: grid;
     grid-template-columns: 1fr 6fr;
 
-
 }
 .dialogItems{
 padding: 10px;
 }
-.dialog{
+.dialog img{
+    height: 50px;
+    border-radius: 30px;
 }
 .dialog a {
     text-decoration: none;

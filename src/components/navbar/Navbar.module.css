@@ -13,3 +13,12 @@
 .item a.active {
     color: gold;
 }
+.classForFriends{
+    padding-top: 100px;
+    color: blue;
+    font-size: 45px;
+}
+.friendsWrapper{
+    display: flex;
+    padding: 10px;
+}

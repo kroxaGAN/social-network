@@ -4,7 +4,7 @@ import {MyPosts, PostType} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 type ProfilePropsType={
-    posts:PostType[]
+    state:{posts:PostType[]}
 }
 
 export const Profile = (props:ProfilePropsType) => {
@@ -13,7 +13,7 @@ export const Profile = (props:ProfilePropsType) => {
         <div className={s.content}>
             Main content
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     )
 }

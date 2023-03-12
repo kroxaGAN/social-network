@@ -1,4 +1,4 @@
-import React from "react";
+import React, from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 
@@ -11,11 +11,6 @@ type MyPostsProps={
 
 
 export const MyPosts = (props:MyPostsProps) => {
-    // let posts = [
-    //     {id: 1, message: 'Hello my friend', countLikes: 15},
-    //     {id: 2, message: 'It\'s first commit', countLikes: 25},
-    //     {id: 3, message: 'Yeee', countLikes: 1},
-    // ]
 
     let postsElements=props.posts.map(p =>
          <Post
@@ -24,14 +19,26 @@ export const MyPosts = (props:MyPostsProps) => {
             countLikes={p.countLikes}
         />
     )
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    debugger
+    const addPost=()=>{
+        // const inputData:any=document.getElementById('new-post')?.value
+        console.log(newPostElement.current?.value)
+
+    }
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea>!!!</textarea>
+                    <textarea
+                        ref={newPostElement}
+                        onChange={addPost}
+                    >add post</textarea>
+
                 </div>
-                <button>Add new post</button>
+                <button onClick={addPost}>Add new post</button>
             </div>
             {postsElements}
         </div>
