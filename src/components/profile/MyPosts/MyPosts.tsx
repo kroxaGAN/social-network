@@ -27,6 +27,7 @@ export const MyPosts = (props:MyPostsProps) => {
         console.log(newPostElement.current?.value)
         if (newPostElement.current?.value){
             props.addPost(newPostElement.current?.value)
+            newPostElement.current.value=''
         }
     }
     return (

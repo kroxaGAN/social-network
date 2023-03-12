@@ -14,7 +14,7 @@ export type FriendType={
     id: number, name: string, avatar:string
 }
 
-type StateType = {
+export type StateType = {
     profilePage: {
         posts: PostType[]
     },
@@ -22,7 +22,7 @@ type StateType = {
     },
     sideBar:{friends:FriendType[]}
 }
-type AppPropsType = {
+export type AppPropsType = {
     state: StateType,
     addPost:(postMessage:string)=>void
 }
