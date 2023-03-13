@@ -1,11 +1,19 @@
 import React from 'react';
 import './index.css';
-import {addMessage, addNewMessageText, addPost, state, subscibe, updateNewPostText} from "./redux/state";
-import App, {StateType} from "./App";
+import {
+    addMessage,
+    addNewMessageText,
+    addPost,
+    RootStateType,
+    state,
+    subscibe,
+    updateNewPostText
+} from "./redux/state";
+import App from "./App";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 
-let rerenderEntireTree=(state:StateType)=>{
+let rerenderEntireTree=(state:RootStateType)=>{
     ReactDOM.render(
         <BrowserRouter>
             <App state={state}

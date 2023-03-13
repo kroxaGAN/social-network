@@ -1,7 +1,8 @@
 import React from "react";
 import s from "./Profile.module.css"
-import {MyPosts, PostType} from "./MyPosts/MyPosts";
+import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {PostType} from "../../redux/state";
 
 type ProfilePropsType={
     profilePageState:{posts:PostType[], newPostText:string}
