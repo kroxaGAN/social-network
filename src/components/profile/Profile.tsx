@@ -4,8 +4,9 @@ import {MyPosts, PostType} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 type ProfilePropsType={
-    state:{posts:PostType[]}
-    addPost:(postMessage:string)=>void
+    profilePageState:{posts:PostType[], newPostText:string}
+    addPost:()=>void,
+    updateNewPostText:(text:string)=>void
 }
 
 export const Profile = (props:ProfilePropsType) => {
@@ -14,7 +15,12 @@ export const Profile = (props:ProfilePropsType) => {
         <div className={s.content}>
             Main content
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
+            <MyPosts
+                posts={props.profilePageState.posts}
+                addPost={props.addPost}
+                newPostText={props.profilePageState.newPostText}
+                updateNewPostText={props.updateNewPostText}
+            />
         </div>
     )
 }

@@ -11,23 +11,33 @@ export type MessageType = {
 }
 
 type DialogsPropsType = {
-    state: {
+    dialogsPageState: {
         dialogs: DialogType[],
-        messages: MessageType[]
-    }
+        messages: MessageType[],
+        newDialogText:string
+    },
+    addNewMessageText:(text:string)=>void,
+    addMessage:()=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
-    let dialogsElement = props.state.dialogs.map((d) =>
+    let dialogsElement = props.dialogsPageState.dialogs.map((d) =>
         <DialogItem key={d.id} name={d.name} id={d.id} avatar={d.avatar}/>
     )
-    let messagesElement = props.state.messages.map((m) =>
+    let messagesElement = props.dialogsPageState.messages.map((m) =>
         <Message key={m.id} message={m.message}/>
     )
     let newMessageTextarea=React.createRef<HTMLTextAreaElement>()
     const addNewMessageHandler=()=>{
+        // let message=newMessageTextarea.current?.value
+        // alert(message)
+        props.addMessage()
+    }
+    const addNewMessage=()=>{
         let message=newMessageTextarea.current?.value
-        alert(message)
+        if (message){
+            props.addNewMessageText(message)
+        }
     }
     return (
         <div className={s.dialogs}>
@@ -42,7 +52,9 @@ export const Dialogs = (props: DialogsPropsType) => {
                     <div>
                         <textarea
                             ref={newMessageTextarea}
-                        >new message</textarea>
+                            value={props.dialogsPageState.newDialogText}
+                            onChange={addNewMessage}
+                        />
                     </div>
                     <button onClick={addNewMessageHandler}>Add message</button>
                 </div>

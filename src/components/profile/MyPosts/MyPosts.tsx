@@ -7,7 +7,9 @@ export type PostType={
 }
 type MyPostsProps={
     posts:PostType[],
-    addPost:(postMessage:string)=>void
+    addPost:()=>void,
+    newPostText:string,
+    updateNewPostText:(text:string)=>void
 }
 
 
@@ -24,10 +26,12 @@ export const MyPosts = (props:MyPostsProps) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost=()=>{
         // const inputData:any=document.getElementById('new-post')?.value
-        console.log(newPostElement.current?.value)
-        if (newPostElement.current?.value){
-            props.addPost(newPostElement.current?.value)
-            newPostElement.current.value=''
+            props.addPost()
+    }
+    const onPostChange=()=>{
+        const text=newPostElement.current?.value
+        if(text){
+            props.updateNewPostText(text)
         }
     }
     return (
@@ -37,7 +41,9 @@ export const MyPosts = (props:MyPostsProps) => {
                 <div>
                     <textarea
                         ref={newPostElement}
-                    >add post</textarea>
+                        value={props.newPostText}
+                        onChange={onPostChange}
+                    />
 
                 </div>
                 <button onClick={addPost}>Add new post</button>

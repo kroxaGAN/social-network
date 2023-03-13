@@ -6,7 +6,8 @@ export let state = {
             {id: 1, message: 'Hello my friend', countLikes: 15},
             {id: 2, message: "It\'s first commit", countLikes: 25},
             {id: 3, message: 'Yeee', countLikes: 1},
-        ]
+        ],
+        newPostText:"it-kamasutra"
     },
     dialogsPage: {
         messages: [
@@ -18,7 +19,8 @@ export let state = {
             {id: 1, name: 'Dima', avatar:"https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png"},
             {id: 2, name: 'Andreu', avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp3xq6yMAh7HKpnLoT17HDDvOIAJb0u98jPw&usqp=CAU"},
             {id: 3, name: 'Valeiy', avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXSjkWNYkyTK94NswJwN5f4kUJ7eQMn2GJ7w&usqp=CAU"}
-        ]
+        ],
+        newDialogText:"hi Broo"
     },
     sideBar:{
         friends:[
@@ -28,8 +30,23 @@ export let state = {
         ]
     }
 }
-export let addPost=(postMessage:string)=>{
-    let newPost={id: 4, message: postMessage, countLikes: 0}
+export let addPost=()=>{
+    let newPost={id: 4, message: state.profilePage.newPostText, countLikes: 0}
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=''
+    rerenderEntireTree(state)
+}
+export const updateNewPostText=(text:string)=>{
+    state.profilePage.newPostText=text
+    rerenderEntireTree(state)
+}
+export const addNewMessageText=(text:string)=>{
+    state.dialogsPage.newDialogText=text
+    rerenderEntireTree(state)
+}
+export const addMessage=()=>{
+    const newMessage={id: 4, message: state.dialogsPage.newDialogText}
+    state.dialogsPage.messages.push(newMessage)
+    state.dialogsPage.newDialogText=''
     rerenderEntireTree(state)
 }
