@@ -1,4 +1,8 @@
-import {rerenderEntireTree} from "../render";
+import {StateType} from "../App";
+
+let rerenderEntireTree=(state:StateType)=>{
+    console.log("render",state)
+}
 
 export let state = {
     profilePage: {
@@ -49,4 +53,8 @@ export const addMessage=()=>{
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newDialogText=''
     rerenderEntireTree(state)
+}
+
+export const subscibe=(observer:(state:StateType)=>void)=>{
+    rerenderEntireTree=observer
 }
