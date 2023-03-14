@@ -1,26 +1,18 @@
 import React from 'react';
 import './index.css';
-import {
-    addMessage,
-    addNewMessageText,
-    addPost,
-    RootStateType,
-    state,
-    subscibe,
-    updateNewPostText
-} from "./redux/state";
 import App from "./App";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
+import {store} from "./redux/state";
 
-let rerenderEntireTree=(state:RootStateType)=>{
+let rerenderEntireTree=()=>{
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state}
-                 addPost={addPost}
-                 updateNewPostText={updateNewPostText}
-                 addNewMessageText={addNewMessageText}
-                 addMessage={addMessage}
+            <App state={store.getState()}
+                 addPost={store.addPost}
+                 updateNewPostText={store.updateNewPostText}
+                 addNewMessageText={store.addNewMessageText}
+                 addMessage={store.addMessage}
             />
         </BrowserRouter>,
         document.getElementById('root')
@@ -28,7 +20,7 @@ let rerenderEntireTree=(state:RootStateType)=>{
 }
 
 
-rerenderEntireTree(state)
+rerenderEntireTree()
 
-subscibe(rerenderEntireTree)
+store.subscibe(rerenderEntireTree)
 
