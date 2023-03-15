@@ -19,17 +19,18 @@ export type dialogsPageType = {
     dialogs: DialogType[],
     newDialogText: string
 }
-export type sideBarType={
-    friends:FriendType[]
+export type sideBarType = {
+    friends: FriendType[]
 }
-export type RootStateType={
+export type RootStateType = {
     profilePage: profilePageType,
-    dialogsPage:dialogsPageType,
+    dialogsPage: dialogsPageType,
     sideBar: sideBarType
 }
 
-export let store={
-    _state:{
+
+export let store = {
+    _state: {
         profilePage: {
             posts: [
                 {id: 1, message: 'Hello my friend', countLikes: 15},
@@ -61,42 +62,100 @@ export let store={
         },
         sideBar: {
             friends: [
-                {id: 1, name: 'Kostia', avatar: "https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916__340.png"},
-                {id: 2, name: 'Vera', avatar: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png"},
-                {id: 3, name: 'Yulia', avatar: "https://cdn.pixabay.com/photo/2016/08/20/05/36/avatar-1606914_960_720.png"}
+                {
+                    id: 1,
+                    name: 'Kostia',
+                    avatar: "https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916__340.png"
+                },
+                {
+                    id: 2,
+                    name: 'Vera',
+                    avatar: "https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png"
+                },
+                {
+                    id: 3,
+                    name: 'Yulia',
+                    avatar: "https://cdn.pixabay.com/photo/2016/08/20/05/36/avatar-1606914_960_720.png"
+                }
             ]
         }
-    },
-    getState(){
-      return this._state
     },
     _subscribe(state: RootStateType) {
         console.log("render", state)
     },
-    addPost () {
-        let newPost = {id: 4, message: this._state.profilePage.newPostText, countLikes: 0}
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._subscribe(this._state)
-    },
-    updateNewPostText (text: string) {
-        this._state.profilePage.newPostText = text
-        this._subscribe(this._state)
-    },
-    addNewMessageText (text: string) {
-        this._state.dialogsPage.newDialogText = text
-        this._subscribe(this._state)
-    },
-    addMessage () {
-        const newMessage = {id: 4, message: this._state.dialogsPage.newDialogText}
-        this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.newDialogText = ''
-        this._subscribe(this._state)
+
+    getState() {
+        return this._state
     },
     subscibe(observer: () => void) {
         this._subscribe = observer
+    },
+
+    // addPost() {
+    //     let newPost = {id: 4, message: this._state.profilePage.newPostText, countLikes: 0}
+    //     this._state.profilePage.posts.push(newPost)
+    //     this._state.profilePage.newPostText = ''
+    //     this._subscribe(this._state)
+    // },
+    // updateNewPostText(text: string) {
+    //     this._state.profilePage.newPostText = text
+    //     this._subscribe(this._state)
+    // },
+    // addNewMessageText(text: string) {
+    //     this._state.dialogsPage.newDialogText = text
+    //     this._subscribe(this._state)
+    // },
+    // addMessage() {
+    //     const newMessage = {id: 4, message: this._state.dialogsPage.newDialogText}
+    //     this._state.dialogsPage.messages.push(newMessage)
+    //     this._state.dialogsPage.newDialogText = ''
+    //     this._subscribe(this._state)
+    // },
+    dispatch(action: ActionType) {
+        if (action.type === "ADD-POST") {
+            let newPost = {id: 4, message: this._state.profilePage.newPostText, countLikes: 0}
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._subscribe(this._state)
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.text
+            this._subscribe(this._state)
+        } else if (action.type === "ADD-NEW-MESSAGE-TEXT") {
+            debugger
+            console.log("state: " + this._state)
+            this._state.dialogsPage.newDialogText = action.text
+            this._subscribe(this._state)
+        } else if (action.type === "ADD-MESSAGE") {
+            const newMessage = {id: 4, message: this._state.dialogsPage.newDialogText}
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newDialogText = ''
+            this._subscribe(this._state)
+        }
     }
 }
 
+export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
+    ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC>
+
+export const addPostAC = () => {
+    return {
+        type: "ADD-POST"
+    } as const
+}
+export const updateNewPostTextAC = (text: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT", text
+    } as const
+}
+export const addMessageAC = () => {
+    return {
+        type: "ADD-MESSAGE"
+    } as const
+}
+export const addNewMessageTextAC = (text: string) => {
+    return {
+        type: "ADD-NEW-MESSAGE-TEXT", text
+    } as const
+}
 
 // window.store=store;

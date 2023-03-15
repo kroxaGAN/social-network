@@ -8,14 +8,15 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import {ActionType, RootStateType} from "./redux/state";
 
 export type AppPropsType = {
     state: RootStateType,
-    addPost: () => void,
-    updateNewPostText: (text: string) => void
-    addNewMessageText: (text: string) => void
-    addMessage: () => void
+    // addPost: () => void,
+    // updateNewPostText: (text: string) => void
+    // addNewMessageText: (text: string) => void
+    // addMessage: () => void
+    dispatch:({}:ActionType)=>void
 }
 
 function App(props: AppPropsType) {
@@ -26,13 +27,15 @@ function App(props: AppPropsType) {
             <div className={"app-wrapper-content"}>
                 <Route path={'/dialogs'} render={() => <Dialogs
                     dialogsPageState={props.state.dialogsPage}
-                    addNewMessageText={props.addNewMessageText}
-                    addMessage={props.addMessage}
+                    // addNewMessageText={props.addNewMessageText}
+                    // addMessage={props.addMessage}
+                    dispatch={props.dispatch}
                 />}/>
                 <Route path={'/profile'} render={() => <Profile
                     profilePageState={props.state.profilePage}
-                    addPost={props.addPost}
-                    updateNewPostText={props.updateNewPostText}
+                    // addPost={props.addPost}
+                    // updateNewPostText={props.updateNewPostText}
+                    dispatch={props.dispatch}
                 />}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>

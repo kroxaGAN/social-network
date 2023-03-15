@@ -2,7 +2,7 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import React from "react";
-import {DialogType, MessageType} from "../../redux/state";
+import {ActionType, addMessageAC, addNewMessageTextAC, DialogType, MessageType} from "../../redux/state";
 
 type DialogsPropsType = {
     dialogsPageState: {
@@ -10,8 +10,9 @@ type DialogsPropsType = {
         messages: MessageType[],
         newDialogText:string
     },
-    addNewMessageText:(text:string)=>void,
-    addMessage:()=>void
+    // addNewMessageText:(text:string)=>void,
+    // addMessage:()=>void,
+    dispatch:({}:ActionType)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -25,12 +26,16 @@ export const Dialogs = (props: DialogsPropsType) => {
     const addNewMessageHandler=()=>{
         // let message=newMessageTextarea.current?.value
         // alert(message)
-        props.addMessage()
+        // props.addMessage()
+        // props.dispatch({type:"ADD-MESSAGE", text:message})
+        props.dispatch(addMessageAC())
     }
     const addNewMessage=()=>{
         let message=newMessageTextarea.current?.value
         if (message){
-            props.addNewMessageText(message)
+            // props.addNewMessageText(message)
+            // props.dispatch({type:"ADD-NEW-MESSAGE-TEXT",text:message})
+            props.dispatch(addNewMessageTextAC(message))
         }
     }
     return (
