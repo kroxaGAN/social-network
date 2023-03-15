@@ -91,7 +91,7 @@ export let store = {
     getState() {
         return this._state
     },
-    subscibe(observer: () => void) {
+    subscribe(observer: () => void) {
         this._subscribe = observer
     },
 
