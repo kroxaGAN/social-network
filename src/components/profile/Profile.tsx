@@ -8,7 +8,7 @@ type ProfilePropsType={
     profilePageState:{posts:PostType[], newPostText:string}
     // addPost:()=>void,
     // updateNewPostText:(text:string)=>void,
-    dispatch:({}:ActionType)=>void
+    dispatch:(action:ActionType)=>void
 }
 
 export const Profile = (props:ProfilePropsType) => {

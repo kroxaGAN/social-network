@@ -1,3 +1,7 @@
+import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
+import {addMessageAC, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
+import {sideBarReducer} from "./sideBar-reducer";
+
 export type MessageType = {
     id: number, message: string
 }
@@ -112,50 +116,34 @@ export let store = {
     //     this._subscribe(this._state)
     // },
     dispatch(action: ActionType) {
-        if (action.type === "ADD-POST") {
-            let newPost = {id: 4, message: this._state.profilePage.newPostText, countLikes: 0}
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._subscribe(this._state)
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.text
-            this._subscribe(this._state)
-        } else if (action.type === "ADD-NEW-MESSAGE-TEXT") {
-            debugger
-            console.log("state: " + this._state)
-            this._state.dialogsPage.newDialogText = action.text
-            this._subscribe(this._state)
-        } else if (action.type === "ADD-MESSAGE") {
-            const newMessage = {id: 4, message: this._state.dialogsPage.newDialogText}
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newDialogText = ''
-            this._subscribe(this._state)
-        }
+        this._state.profilePage=profileReducer(this._state.profilePage,action)
+        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
+        this._state.sideBar=sideBarReducer(this._state.sideBar,action)
+        this._subscribe(this._state)
+
+        // if (action.type === "ADD-POST") {
+        //     let newPost = {id: 4, message: this._state.profilePage.newPostText, countLikes: 0}
+        //     this._state.profilePage.posts.push(newPost)
+        //     this._state.profilePage.newPostText = ''
+        //     this._subscribe(this._state)
+        // } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        //     this._state.profilePage.newPostText = action.text
+        //     this._subscribe(this._state)
+        // } else if (action.type === "ADD-NEW-MESSAGE-TEXT") {
+        //     debugger
+        //     console.log("state: " + this._state)
+        //     this._state.dialogsPage.newDialogText = action.text
+        //     this._subscribe(this._state)
+        // } else if (action.type === "ADD-MESSAGE") {
+        //     const newMessage = {id: 4, message: this._state.dialogsPage.newDialogText}
+        //     this._state.dialogsPage.messages.push(newMessage)
+        //     this._state.dialogsPage.newDialogText = ''
+        //     this._subscribe(this._state)
+        // }
     }
 }
 
 export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC>
-
-export const addPostAC = () => {
-    return {
-        type: "ADD-POST"
-    } as const
-}
-export const updateNewPostTextAC = (text: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT", text
-    } as const
-}
-export const addMessageAC = () => {
-    return {
-        type: "ADD-MESSAGE"
-    } as const
-}
-export const addNewMessageTextAC = (text: string) => {
-    return {
-        type: "ADD-NEW-MESSAGE-TEXT", text
-    } as const
-}
 
 // window.store=store;

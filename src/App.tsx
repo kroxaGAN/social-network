@@ -16,7 +16,7 @@ export type AppPropsType = {
     // updateNewPostText: (text: string) => void
     // addNewMessageText: (text: string) => void
     // addMessage: () => void
-    dispatch:({}:ActionType)=>void
+    dispatch:(action:ActionType)=>void
 }
 
 function App(props: AppPropsType) {

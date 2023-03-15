@@ -2,7 +2,8 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import React from "react";
-import {ActionType, addMessageAC, addNewMessageTextAC, DialogType, MessageType} from "../../redux/state";
+import {ActionType, DialogType, MessageType} from "../../redux/state";
+import {addMessageAC, addNewMessageTextAC} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
     dialogsPageState: {
@@ -12,7 +13,7 @@ type DialogsPropsType = {
     },
     // addNewMessageText:(text:string)=>void,
     // addMessage:()=>void,
-    dispatch:({}:ActionType)=>void
+    dispatch:(action:ActionType)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
