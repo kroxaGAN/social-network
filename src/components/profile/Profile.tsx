@@ -1,14 +1,13 @@
 import React from "react";
 import s from "./Profile.module.css"
-import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType, PostType} from "../../redux/store";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {StoreType} from "../../redux/redux-store";
 
 type ProfilePropsType={
-    profilePageState:{posts:PostType[], newPostText:string}
-    // addPost:()=>void,
-    // updateNewPostText:(text:string)=>void,
-    dispatch:(action:ActionType)=>void
+    // profilePageState:{posts:PostType[], newPostText:string}
+    // dispatch:(action:ActionType)=>void
+    store:StoreType
 }
 
 export const Profile = (props:ProfilePropsType) => {
@@ -17,13 +16,13 @@ export const Profile = (props:ProfilePropsType) => {
         <div className={s.content}>
             Main content
             <ProfileInfo/>
-            <MyPosts
-                posts={props.profilePageState.posts}
-                // addPost={props.addPost}
-                newPostText={props.profilePageState.newPostText}
-                // updateNewPostText={props.updateNewPostText}
-                dispatch={props.dispatch}
-            />
+            {/*<MyPostsContainer*/}
+            {/*    posts={props.profilePageState.posts}*/}
+            {/*    newPostText={props.profilePageState.newPostText}*/}
+            {/*    dispatch={props.dispatch}*/}
+            {/*/>*/}
+            <MyPostsContainer store={props.store}/>
+
         </div>
     )
 }

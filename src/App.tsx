@@ -8,34 +8,37 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionType} from "./redux/store";
+import {StoreType} from "./redux/redux-store";
 
 export type AppPropsType = {
-    state: any,
+    store: StoreType
+    // state: RootStateType,
     // addPost: () => void,
     // updateNewPostText: (text: string) => void
     // addNewMessageText: (text: string) => void
     // addMessage: () => void
-    dispatch:(action:ActionType)=>void
+    // dispatch:(action:ActionType)=>void
 }
 
 function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar state={props.state.sideBar}/>
+            <Navbar state={props.store.getState().sideBar}/>
             <div className={"app-wrapper-content"}>
                 <Route path={'/dialogs'} render={() => <Dialogs
-                    dialogsPageState={props.state.dialogs}
+                    store={props.store}
+                    dialogsPageState={props.store.getState().dialogsPage}
                     // addNewMessageText={props.addNewMessageText}
                     // addMessage={props.addMessage}
-                    dispatch={props.dispatch}
+                    dispatch={props.store.dispatch}
                 />}/>
                 <Route path={'/profile'} render={() => <Profile
-                    profilePageState={props.state.profile}
+                    store={props.store}
+                    // profilePageState={props.state.profilePage}
                     // addPost={props.addPost}
                     // updateNewPostText={props.updateNewPostText}
-                    dispatch={props.dispatch}
+                    // dispatch={props.dispatch}
                 />}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>

@@ -1,15 +1,13 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {ActionType, PostType} from "../../../redux/store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
+import { PostType} from "../../../redux/store";
 
 type MyPostsProps={
     posts:PostType[],
-    // addPost:()=>void,
+    addPost:()=>void,
     newPostText:string,
-    // updateNewPostText:(text:string)=>void
-    dispatch:(action:ActionType)=>void
+    updateNewPostText:(text:string)=>void
 }
 
 
@@ -25,17 +23,12 @@ export const MyPosts = (props:MyPostsProps) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost=()=>{
-        // const inputData:any=document.getElementById('new-post')?.value
-        //     props.addPost()
-        // props.dispatch({type:"ADD-POST"})
-        props.dispatch(addPostAC())
+            props.addPost()
     }
     const onPostChange=()=>{
         const text=newPostElement.current?.value
         if(text){
-            // props.updateNewPostText(text)
-            // props.dispatch({type:"UPDATE-NEW-POST-TEXT",text:text})
-            props.dispatch(updateNewPostTextAC(text))
+            props.updateNewPostText(text)
         }
     }
     return (

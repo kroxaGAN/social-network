@@ -5,11 +5,17 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
 
 let reducers=combineReducers({
-    profile:profileReducer,
-    dialogs:dialogsReducer,
+    profilePage:profileReducer,
+    dialogsPage:dialogsReducer,
     sideBar:sideBarReducer
 })
 
-export const AppReducerType=typeof reducers
+export type AppReducerType=ReturnType<typeof reducers>
 
-export const store=createStore<any, any, any, any>(reducers)
+export const store=createStore(reducers)
+
+export type StoreType=typeof store
+
+
+// @ts-ignore
+window.store = store;

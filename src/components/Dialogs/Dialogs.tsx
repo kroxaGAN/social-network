@@ -4,8 +4,10 @@ import {Message} from "./Message/Message";
 import React from "react";
 import {ActionType, DialogType, MessageType} from "../../redux/store";
 import {addMessageAC, addNewMessageTextAC} from "../../redux/dialogs-reducer";
+import {StoreType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
+    store:StoreType
     dialogsPageState: {
         dialogs: DialogType[],
         messages: MessageType[],
