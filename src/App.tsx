@@ -3,12 +3,12 @@ import './App.css';
 import {Header} from "./components/header/Header";
 import {Navbar} from "./components/navbar/Navbar";
 import {Profile} from "./components/profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {StoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 export type AppPropsType = {
     store: StoreType
@@ -26,12 +26,12 @@ function App(props: AppPropsType) {
             <Header/>
             <Navbar state={props.store.getState().sideBar}/>
             <div className={"app-wrapper-content"}>
-                <Route path={'/dialogs'} render={() => <Dialogs
+                <Route path={'/dialogs'} render={() => <DialogsContainer
                     store={props.store}
-                    dialogsPageState={props.store.getState().dialogsPage}
+                    // dialogsPageState={props.store.getState().dialogsPage}
                     // addNewMessageText={props.addNewMessageText}
                     // addMessage={props.addMessage}
-                    dispatch={props.store.dispatch}
+                    // dispatch={props.store.dispatch}
                 />}/>
                 <Route path={'/profile'} render={() => <Profile
                     store={props.store}
