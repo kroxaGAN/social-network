@@ -1,37 +1,55 @@
 import React from "react";
 import {addMessageAC, addNewMessageTextAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext/storeContext";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 type DialogsPropsType = {
     // store:StoreType
 }
 
-export const DialogsContainer = (props: DialogsPropsType) => {
+// export const DialogsContainer = (props: DialogsPropsType) => {
+//
+//
+//     return (
+//         <StoreContext.Consumer>
+//             {
+//                 (store) => {
+//                     const onAddNewMessageHandler = () => {
+//                         store.dispatch(addMessageAC())
+//                     }
+//                     const onAddNewMessage = (message: string) => {
+//                         store.dispatch(addNewMessageTextAC(message))
+//                     }
+//                     return (
+//                         <Dialogs
+//                             addNewMessage={onAddNewMessage}
+//                             addNewMessageHandler={onAddNewMessageHandler}
+//                             newDialogText={store.getState().dialogsPage.newDialogText}
+//                             dialogs={store.getState().dialogsPage.dialogs}
+//                             messages={store.getState().dialogsPage.messages}
+//                         />
+//                     )
+//                 }
+//             }
+//         </StoreContext.Consumer>
+//
+//     )
+// }
 
-
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const onAddNewMessageHandler = () => {
-                        store.dispatch(addMessageAC())
-                    }
-                    const onAddNewMessage = (message: string) => {
-                        store.dispatch(addNewMessageTextAC(message))
-                    }
-                    return (
-                        <Dialogs
-                            addNewMessage={onAddNewMessage}
-                            addNewMessageHandler={onAddNewMessageHandler}
-                            newDialogText={store.getState().dialogsPage.newDialogText}
-                            dialogs={store.getState().dialogsPage.dialogs}
-                            messages={store.getState().dialogsPage.messages}
-                        />
-                    )
-                }
-            }
-        </StoreContext.Consumer>
-
-    )
+const mapStateToProps=(state:any)=>{
+    return {
+        dialogs:state.dialogsPage.dialogs,
+        messages:state.dialogsPage.messages,
+        newDialogText:state.dialogsPage.newDialogText
+    }
 }
+const mapDispatchToProps=(dispatch:Dispatch)=>{
+
+    return {
+        addNewMessageHandler: ()=>dispatch(addMessageAC()),
+        addNewMessage:(message:string)=>{dispatch(addNewMessageTextAC(message))}
+    }
+}
+
+export const DialogsContainer=connect (mapStateToProps,mapDispatchToProps)(Dialogs)

@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./components/header/Header";
-import {Navbar} from "./components/navbar/Navbar";
 import {Profile} from "./components/profile/Profile";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {NavbarContainer} from "./components/navbar/NavbarContainer";
 
 export type AppPropsType = {
     // store: StoreType
@@ -23,7 +23,7 @@ function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar />
+            <NavbarContainer/>
             {/*<Navbar state={props.store.getState().sideBar}/>*/}
             <div className={"app-wrapper-content"}>
                 <Route path={'/dialogs'} render={() => <DialogsContainer
