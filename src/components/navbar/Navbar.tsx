@@ -33,7 +33,7 @@ export const Navbar = (props: NavbarPropsType) => {
             </div>
             <div className={s.friendsWrapper}>
                 {props.friends.map((fr: FriendType) => (
-                    <Friend name={fr.name} avatar={fr.avatar}/>
+                    <Friend name={fr.name} avatar={fr.avatar} key={fr.id}/>
                 ))}
 
             </div>
