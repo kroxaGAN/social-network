@@ -30,20 +30,23 @@ export const Users = (props: UsersProps) => {
     //         locathion: {city: 'Vilnius', country: 'Litva'}
     //     },
     // ]
-    if(props.usersState.length===0){
+    const getUsersHandler=()=>{
+        if(props.usersState.length===0){
 
-        axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
-            .then((res)=>{
-                props.setUsers(res.data.items)
-            })
+            axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
+                .then((res)=>{
+                    props.setUsers(res.data.items)
+                })
 
+        }
     }
+
 
     return (
         <div>
             <h3>Users</h3>
+            {props.usersState.length===0 && <button onClick={getUsersHandler}>Get users</button>}
             {
-
                      props.usersState.map(el =>
 
                         <div key={el.id}>
