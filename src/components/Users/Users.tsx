@@ -17,21 +17,28 @@ type ReturnedDataType = {
 }
 
 class Users extends React.Component<UsersProps> {
+    constructor(props:any) {
+        super(props)
+        axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
+            .then((res)=>{
+                this.props.setUsers(res.data.items)
+            })
+    }
     getUsersHandler=()=>{
-        if(this.props.usersState.length===0){
-
-            axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
-                .then((res)=>{
-                    this.props.setUsers(res.data.items)
-                })
-
-        }
+        // if(this.props.usersState.length===0){
+        //
+        //     axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
+        //         .then((res)=>{
+        //             this.props.setUsers(res.data.items)
+        //         })
+        //
+        // }
     }
     render() {
         return (
             <div>
                 <h3>Users</h3>
-                {this.props.usersState.length===0 && <button onClick={this.getUsersHandler}>Get users</button>}
+                {/*{this.props.usersState.length===0 && <button onClick={this.getUsersHandler}>Get users</button>}*/}
                 {
                     this.props.usersState.map(el =>
 
