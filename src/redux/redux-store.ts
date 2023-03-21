@@ -3,11 +3,13 @@ import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
+import {usersReducer} from "./users-reducer";
 
 let reducers=combineReducers({
     profilePage:profileReducer,
     dialogsPage:dialogsReducer,
-    sideBar:sideBarReducer
+    sideBar:sideBarReducer,
+    usersFind:usersReducer
 })
 
 export type AppReducerType=ReturnType<typeof reducers>

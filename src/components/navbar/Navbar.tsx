@@ -27,6 +27,9 @@ export const Navbar = (props: NavbarPropsType) => {
         <div className={classForItem}>
             <NavLink to={'/settings'} activeClassName={s.active}>Settings</NavLink>
         </div>
+        <div className={classForItem}>
+            <NavLink to={'/users'} activeClassName={s.active}>Find users</NavLink>
+        </div>
         <div>
             <div className={s.classForFriends}>
                 Friends
