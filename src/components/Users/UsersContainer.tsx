@@ -7,7 +7,8 @@ const mapStateToProps = (state: any) => {
     return {
         usersState:state.usersFind.users,
         pageSize:state.usersFind.pageSize,
-        totalUsersCount:state.usersFind.totalUsersCount
+        totalUsersCount:state.usersFind.totalUsersCount,
+        currentPage:state.usersFind.currentPage
     }
 }
 const mapDispatchToProps = (dispatch: any) => {

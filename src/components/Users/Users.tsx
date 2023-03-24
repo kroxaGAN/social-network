@@ -8,6 +8,7 @@ type UsersProps = {
     usersState: userType[],
     pageSize:number,
     totalUsersCount:number,
+    currentPage:number,
     follow: (userId: number) => void,
     unFollow: (userId: number) => void,
     setUsers: (users: userType[]) => void
@@ -56,12 +57,12 @@ class Users extends React.Component<UsersProps> {
                     {/*{pages.map((el:number)=>{<span className={s.selectedPage}>111</span>} )}*/}
                     {
                         pages.map((p:number)=>{
-                            <span className={s.selectedPage}>{p}</span>
+                           return <span className={this.props.currentPage === p ? s.selectedPage : ''}>{p}</span>
                         })
                     }
                 </div>
 
-                {/*<h3>Users</h3>*/}
+                <h3>Users</h3>
                 {/*{this.props.usersState.length===0 && <button onClick={this.getUsersHandler}>Get users</button>}*/}
                 {
                     this.props.usersState.map(el =>

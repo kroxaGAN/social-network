@@ -13,7 +13,8 @@ export type userType = {
 type inithialStateType = {
     users: userType[],
     pageSize:number,
-    totalUsersCount:number
+    totalUsersCount:number,
+    currentPage:number
 }
 
 const inithialState = {
@@ -30,7 +31,8 @@ const inithialState = {
         // },
     ],
     pageSize:5,
-    totalUsersCount:15
+    totalUsersCount:15,
+    currentPage:2
 }
 
 export const usersReducer = (state: inithialStateType = inithialState, action: usersActionType) => {
