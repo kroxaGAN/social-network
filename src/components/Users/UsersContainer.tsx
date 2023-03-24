@@ -5,7 +5,9 @@ import Users from "./Users";
 
 const mapStateToProps = (state: any) => {
     return {
-        usersState:state.usersFind.users
+        usersState:state.usersFind.users,
+        pageSize:state.usersFind.pageSize,
+        totalUsersCount:state.usersFind.totalUsersCount
     }
 }
 const mapDispatchToProps = (dispatch: any) => {

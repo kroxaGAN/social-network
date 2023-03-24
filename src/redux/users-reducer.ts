@@ -11,7 +11,9 @@ export type userType = {
     followed: boolean
 }
 type inithialStateType = {
-    users: userType[]
+    users: userType[],
+    pageSize:number,
+    totalUsersCount:number
 }
 
 const inithialState = {
@@ -26,29 +28,33 @@ const inithialState = {
         //     status: 'superBoss',
         //     locathion: {city: 'Vilnius', country: 'Litva'}
         // },
-    ]
+    ],
+    pageSize:5,
+    totalUsersCount:15
 }
 
 export const usersReducer = (state: inithialStateType = inithialState, action: usersActionType) => {
     switch (action.type) {
         case 'FOLLOW':
-            return {...state,
-            users:state.users.map((el) => {
-                return (
-                    el.id === action.userId ? {...el, followed: true} : el
-                )
-            })
+            return {
+                ...state,
+                users: state.users.map((el) => {
+                    return (
+                        el.id === action.userId ? {...el, followed: true} : el
+                    )
+                })
             }
         case 'UNFOLLOW':
-            return {...state,
-                users:state.users.map((el) => {
+            return {
+                ...state,
+                users: state.users.map((el) => {
                     return (
                         el.id === action.userId ? {...el, followed: false} : el
                     )
                 })
             }
         case 'SET-USERS':
-            return {...state, users:[...state.users,...action.users]}
+            return {...state, users: [...state.users, ...action.users]}
         default:
             return state
     }
@@ -64,10 +70,10 @@ export const unFollowAC = (userId: number) => {
         type: "UNFOLLOW", userId
     } as const
 }
-export const setUsersAC=(users:userType[])=>{
-    return{
-        type:'SET-USERS', users
-    }as const
+export const setUsersAC = (users: userType[]) => {
+    return {
+        type: 'SET-USERS', users
+    } as const
 }
 
 type usersActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>

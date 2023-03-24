@@ -6,6 +6,8 @@ import React from "react";
 
 type UsersProps = {
     usersState: userType[],
+    pageSize:number,
+    totalUsersCount:number,
     follow: (userId: number) => void,
     unFollow: (userId: number) => void,
     setUsers: (users: userType[]) => void
@@ -17,13 +19,20 @@ type ReturnedDataType = {
 }
 
 class Users extends React.Component<UsersProps> {
-    constructor(props:any) {
-        super(props)
-        axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
+    // constructor(props:any) {
+    //     super(props)
+    //     axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
+    //         .then((res)=>{
+    //             this.props.setUsers(res.data.items)
+    //         })
+    // }
+    componentDidMount() {
+        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users`)
             .then((res)=>{
                 this.props.setUsers(res.data.items)
             })
     }
+
     getUsersHandler=()=>{
         // if(this.props.usersState.length===0){
         //
@@ -36,9 +45,23 @@ class Users extends React.Component<UsersProps> {
         //some commets
     }
     render() {
+        let pagesCount=this.props.totalUsersCount/this.props.pageSize
+        let pages:any =[]
+        for (let i=1; i <= pagesCount;i++){
+            pages.push(i)
+        }
         return (
             <div>
-                <h3>Users</h3>
+                <div>
+                    {/*{pages.map((el:number)=>{<span className={s.selectedPage}>111</span>} )}*/}
+                    {
+                        pages.map((p:number)=>{
+                            <span className={s.selectedPage}>{p}</span>
+                        })
+                    }
+                </div>
+
+                {/*<h3>Users</h3>*/}
                 {/*{this.props.usersState.length===0 && <button onClick={this.getUsersHandler}>Get users</button>}*/}
                 {
                     this.props.usersState.map(el =>
