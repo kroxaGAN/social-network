@@ -9,5 +9,8 @@
     color: red;
     font-weight: bold;
     font-size: larger;
-
+    cursor: pointer;
+}
+.notSelectedPage{
+    cursor: pointer;
 }
