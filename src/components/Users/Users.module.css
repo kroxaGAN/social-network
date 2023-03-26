@@ -10,7 +10,9 @@
     font-weight: bold;
     font-size: larger;
     cursor: pointer;
+    padding: 5px;
 }
 .notSelectedPage{
     cursor: pointer;
+    padding: 5px;
 }
