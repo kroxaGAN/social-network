@@ -7,3 +7,9 @@
     border-radius: 30px;
     padding-top: 3px;
 }
+.loginBlock{
+    float:right;
+}
+.loginBlock a{
+    color: red;
+}

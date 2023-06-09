@@ -6,7 +6,29 @@ const initialProfileState={
         {id: 2, message: "It\'s first commit", countLikes: 25},
         {id: 3, message: 'Yeee', countLikes: 1},
     ],
-    newPostText: "it-kamasutra"
+    newPostText: "it-kamasutra",
+    profile:{
+
+        "aboutMe": "я крут",
+        "contacts": {
+            "facebook": "facebook.com",
+            "website": null,
+            "vk": "vk.com/dimych",
+            "twitter": "https://twitter.com/@sdf",
+            "instagram": "instagra.com/sds",
+            "youtube": null,
+            "github": "github.com",
+            "mainLink": null
+        },
+        "lookingForAJob": true,
+        "lookingForAJobDescription": "ищу и дурачусь",
+        "fullName": "samurai d",
+        "userId": 200000000,
+        "photos": {
+            "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+            "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+        }
+    }
 }
 
 
@@ -26,6 +48,9 @@ export const profileReducer=(state:profilePageType=initialProfileState,action:Ac
             copyState.newPostText = action.text
             return copyState
         }
+        case "SET-USER-PROFILE":{
+            return {...state,profile:action.profile}
+        }
         default:
             return state
     }
@@ -40,4 +65,9 @@ export const updateNewPostTextAC = (text: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT", text
     } as const
+}
+export const setUserProfileAC=(profile:any)=>{
+    return{
+        type:"SET-USER-PROFILE", profile
+    }as const
 }

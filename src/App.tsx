@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/header/Header";
-import {Profile} from "./components/profile/Profile";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
@@ -9,6 +7,8 @@ import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {NavbarContainer} from "./components/navbar/NavbarContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/profile/ProfileContainer";
+import HeaderContainer from "./components/header/HeaderContainer";
 
 export type AppPropsType = {
     // store: StoreType
@@ -23,7 +23,7 @@ export type AppPropsType = {
 function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <NavbarContainer/>
             {/*<Navbar state={props.store.getState().sideBar}/>*/}
             <div className={"app-wrapper-content"}>
@@ -34,7 +34,7 @@ function App(props: AppPropsType) {
                     // addMessage={props.addMessage}
                     // dispatch={props.store.dispatch}
                 />}/>
-                <Route path={'/profile'} render={() => <Profile
+                <Route path={'/profile/:userId?'} render={() => <ProfileContainer
                     // store={props.store}
                     // profilePageState={props.state.profilePage}
                     // addPost={props.addPost}

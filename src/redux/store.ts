@@ -1,6 +1,7 @@
-import {addPostAC, profileReducer, updateNewPostTextAC} from "./profile-reducer";
+import {addPostAC, profileReducer, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
 import {addMessageAC, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
+import {setAuthUserDataAC} from "./auth-reducer";
 
 export type MessageType = {
     id: number, message: string
@@ -14,9 +15,33 @@ export type PostType = {
 export type FriendType = {
     id: number, name: string, avatar: string
 }
+
+export type profileType={
+
+    "aboutMe": string,
+    "contacts": {
+        "facebook": string,
+        "website": null,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": null,
+        "github": string,
+        "mainLink": null
+    },
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+        "small": string,
+        "large": string
+    }
+}
 export type profilePageType = {
     posts: PostType[],
-    newPostText: string
+    newPostText: string,
+    profile:profileType
 }
 export type dialogsPageType = {
     messages: MessageType[],
@@ -41,7 +66,27 @@ export let store = {
                 {id: 2, message: "It\'s first commit", countLikes: 25},
                 {id: 3, message: 'Yeee', countLikes: 1},
             ],
-            newPostText: "it-kamasutra"
+            newPostText: "it-kamasutra",
+            profile: {
+                "aboutMe": "я круто чувак 1001%",
+                "contacts": {
+                    "facebook": "facebook.com",
+                    "website": null,
+                    "vk": "vk.com/dimych",
+                    "twitter": "https://twitter.com/@sdf",
+                    "instagram": "instagra.com/sds",
+                    "youtube": null,
+                    "github": "github.com",
+                    "mainLink": null
+                },
+                "lookingForAJob": true,
+                "lookingForAJobDescription": "не ищу, а дурачусь",
+                "fullName": "samurai dimych",
+                "userId": 2,
+                "photos": {
+                    "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+                    "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+                }}
         },
         dialogsPage: {
             messages: [
@@ -144,6 +189,7 @@ export let store = {
 }
 
 export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC>
+    ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setAuthUserDataAC>
 
 // window.store=store;

@@ -42,7 +42,7 @@ class UsersAPiComponent extends React.Component<UsersProps> {
     // }
     componentDidMount() {
         this.props.setToggleFetting(true)
-        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
             .then((res) => {
                 this.props.setTotalUsersCount(res.data.totalCount)
                 this.props.setUsers(res.data.items)
@@ -64,7 +64,7 @@ class UsersAPiComponent extends React.Component<UsersProps> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setToggleFetting(true)
-        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
+        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
             .then((res) => {
                 this.props.setUsers(res.data.items)
                 this.props.setToggleFetting(false)

@@ -9,12 +9,12 @@ type ProfilePropsType={
     // store:StoreType
 }
 
-export const Profile = (props:ProfilePropsType) => {
+export const Profile = (props:any) => {
 
     return (
         <div className={s.content}>
             Main content
-            <ProfileInfo/>
+            <ProfileInfo  profile={props.profile} />
             {/*<MyPostsContainer*/}
             {/*    posts={props.profilePageState.posts}*/}
             {/*    newPostText={props.profilePageState.newPostText}*/}

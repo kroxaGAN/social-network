@@ -1,6 +1,8 @@
 import {userType} from "../../redux/users-reducer";
 import s from './Users.module.css'
 import defPhoto from "../../Isses/Images/defPhoto.png"
+import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersProps = {
     totalUsersCount: number,
@@ -27,7 +29,6 @@ export const Users=(props:UsersProps)=>{
     }
     return (
         <div>
-
             <div>
                 {/*{pages.map((el:number)=>{<span className={s.selectedPage}>111</span>} )}*/}
                 {
@@ -48,16 +49,31 @@ export const Users=(props:UsersProps)=>{
                     <div key={el.id}>
                         <span>
                             <div>
+                                <NavLink to={`/profile/${el.id}`} >
                                 <img src={el.photos.small ? el.photos.small : defPhoto} className={s.userFoto}
                                      alt={"ava"}/>
+                                </NavLink>
+
                             </div>
                             <div>
                                 {el.followed
                                     ? <button onClick={() => {
-                                        props.unFollow(el.id)
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
+                                            .then((res)=>{
+                                                if(res.data.resultCode===0){
+                                                    props.unFollow(el.id)
+                                                }
+                                            })
+
+
                                     }}>follow</button>
                                     : <button onClick={() => {
-                                        props.follow(el.id)
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,{},{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
+                                            .then((res)=>{
+                                                if(res.data.resultCode===0){
+                                                    props.follow(el.id)
+                                                }
+                                            })
                                     }}>unfollow</button>
                                 }
 
