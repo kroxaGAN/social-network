@@ -8,12 +8,12 @@ import {
     userType
 } from "../../redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {userAPI} from "../../api/api";
 
 
-type ReturnedDataType = {
+export type ReturnedDataType = {
     items: userType[],
     totalCount: number,
     error: string[]
@@ -42,10 +42,11 @@ class UsersAPiComponent extends React.Component<UsersProps> {
     // }
     componentDidMount() {
         this.props.setToggleFetting(true)
-        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
-            .then((res) => {
-                this.props.setTotalUsersCount(res.data.totalCount)
-                this.props.setUsers(res.data.items)
+        // axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
+        userAPI.getUsers(this.props.pageSize,this.props.currentPage)
+            .then((data) => {
+                this.props.setTotalUsersCount(data.totalCount)
+                this.props.setUsers(data.items)
                 this.props.setToggleFetting(false)
             })
     }
@@ -64,9 +65,10 @@ class UsersAPiComponent extends React.Component<UsersProps> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setToggleFetting(true)
-        axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
-            .then((res) => {
-                this.props.setUsers(res.data.items)
+        // axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`,{withCredentials:true, headers:{"API-KEY":"26fb8af1-3e7d-4c3b-ab20-99c24ecae36c"}})
+        userAPI.getUsers(this.props.pageSize,pageNumber)
+            .then((data) => {
+                this.props.setUsers(data.items)
                 this.props.setToggleFetting(false)
             })
     }
