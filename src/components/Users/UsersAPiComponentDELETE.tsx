@@ -3,7 +3,7 @@ import {userType} from "../../redux/users-reducer";
 import axios from "axios";
 
 import React from "react";
-import { Users } from "./Users";
+import {Users} from "./Users";
 
 type UsersProps = {
     usersState: userType[],
@@ -13,9 +13,9 @@ type UsersProps = {
     follow: (userId: number) => void,
     unFollow: (userId: number) => void,
     setUsers: (users: userType[]) => void,
-    setCurrentPage:(currentPage: number)=>void
-    setTotalUsersCount:(totalUsersCount:number)=>void
-    isFetching:boolean
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
+    isFetching: boolean
 }
 type ReturnedDataType = {
     items: userType[],
@@ -23,7 +23,7 @@ type ReturnedDataType = {
     error: string[]
 }
 
-class UsersAPiComponent extends React.Component<UsersProps> {
+class UsersAPiComponent extends React.Component<any, any> {
     // constructor(props:any) {
     //     super(props)
     //     axios.get<ReturnedDataType>('https://social-network.samuraijs.com/api/1.0/users')
@@ -51,7 +51,7 @@ class UsersAPiComponent extends React.Component<UsersProps> {
         // }
         //some commets
     }
-    onPageChanged=(pageNumber:number)=>{
+    onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         axios.get<ReturnedDataType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
             .then((res) => {
@@ -66,14 +66,16 @@ class UsersAPiComponent extends React.Component<UsersProps> {
         //     pages.push(i)
         // }
         return <Users
-        currentPage={this.props.currentPage}
-        onPageChanged={this.onPageChanged}
-        usersState={this.props.usersState}
-        totalUsersCount={this.props.totalUsersCount}
-        pageSize={this.props.pageSize}
-follow={this.props.follow}
-unFollow={this.props.unFollow}
-        isFetching={this.props.isFetching}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            usersState={this.props.usersState}
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            follow={this.props.follow}
+            unFollow={this.props.unFollow}
+            isFetching={this.props.isFetching}
+            followingInProgress={this.props.followingInProgress}
+            setFollowingInProgress={this.props.setFollowingInProgress}
         />
         // (
         //     <div>
