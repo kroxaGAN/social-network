@@ -1,4 +1,6 @@
 import {ActionType} from "./store";
+import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const initialAuthState = {
     id: 10000,
@@ -34,3 +36,12 @@ export const setAuthUserDataAC = ( id: number ,login: string,email: string) => {
     } as const
 }
 
+export const getAuthUserData=()=>(dispatch:Dispatch)=>{
+    authAPI.me()
+        .then((res)=>{
+            if(res.data.resultCode===0){
+                let {id, login, email}=res.data.data
+                dispatch(setAuthUserDataAC(id, login, email))
+            }
+        })
+}

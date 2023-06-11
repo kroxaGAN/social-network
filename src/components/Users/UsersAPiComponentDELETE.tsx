@@ -75,7 +75,7 @@ class UsersAPiComponent extends React.Component<any, any> {
             unFollow={this.props.unFollow}
             isFetching={this.props.isFetching}
             followingInProgress={this.props.followingInProgress}
-            setFollowingInProgress={this.props.setFollowingInProgress}
+            // setFollowingInProgress={this.props.setFollowingInProgress}
         />
         // (
         //     <div>

@@ -15,11 +15,11 @@ export const userAPI={
                 .then(response=>response.data)
         )
     },
-    auth(){
-        return(
-            instance.get(`auth/me`)
-        )
-    },
+    // auth(){
+    //     return(
+    //         instance.get(`auth/me`)
+    //     )
+    // },
     profile(userId:number){
         return(
             instance.get(`profile/${userId}`)
@@ -35,6 +35,13 @@ export const userAPI={
         return(
             instance.post(`follow/${userId}`)
                 .then(res=>res.data)
+        )
+    },
+}
+export const authAPI={
+    me(){
+        return(
+            instance.get(`auth/me`)
         )
     },
 }

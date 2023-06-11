@@ -10,7 +10,6 @@ type ProfilePropsType={
 }
 
 export const Profile = (props:any) => {
-
     return (
         <div className={s.content}>
             Main content

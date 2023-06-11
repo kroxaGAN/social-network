@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {userAPI} from "../api/api";
+
 export type userType = {
     // id: number, avatarUrl:string, followed: boolean, fullName: string, status: string, locathion: { city: string, country: string }
     name: string,
@@ -82,12 +85,12 @@ export const usersReducer = (state: inithialStateType = inithialState, action: u
     }
 }
 
-export const follow = (userId: number) => {
+export const followSuccess = (userId: number) => {
     return {
         type: "FOLLOW", userId
     } as const
 }
-export const unFollow = (userId: number) => {
+export const unFollowSuccess = (userId: number) => {
     return {
         type: "UNFOLLOW", userId
     } as const
@@ -119,7 +122,38 @@ export const setFollowingInProgress=(userId: number,isFetching:boolean)=>{
     }as const
 }
 
+export const getUsers=(pageSize:number,currentPage:number)=>(dispatch:Dispatch)=>{
+    dispatch(setToggleFetching(true))
+    userAPI.getUsers(pageSize,currentPage)
+        .then((data) => {
+            dispatch(setTotalUsersCount(data.totalCount))
+            dispatch(setUsers(data.items))
+            dispatch(setToggleFetching(false))
+        })
+}
+export const unFollow=(userId: number)=>(dispatch:Dispatch)=>{
+    dispatch(setFollowingInProgress(userId,true))
+    userAPI.unfollow(userId)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(unFollowSuccess(userId))
+            }
+            dispatch(setFollowingInProgress(userId,false))
+        })
+}
+export const follow=(userId: number)=>(dispatch:Dispatch)=>{
+    dispatch(setFollowingInProgress(userId,true))
+    userAPI.follow(userId)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(userId))
+            }
+            dispatch(setFollowingInProgress(userId,false))
+        })
+}
 
-type usersActionType = ReturnType<typeof follow> | ReturnType<typeof unFollow> | ReturnType<typeof setUsers>
+
+
+type usersActionType = ReturnType<typeof followSuccess> | ReturnType<typeof unFollowSuccess> | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof setToggleFetching>
     | ReturnType<typeof setFollowingInProgress>
