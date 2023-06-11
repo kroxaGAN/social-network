@@ -3,6 +3,7 @@ import {addMessageAC, addNewMessageTextAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {AppReducerType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
     // store:StoreType
@@ -37,11 +38,12 @@ type DialogsPropsType = {
 //     )
 // }
 
-const mapStateToProps=(state:any)=>{
+const mapStateToProps=(state:AppReducerType)=>{
     return {
         dialogs:state.dialogsPage.dialogs,
         messages:state.dialogsPage.messages,
-        newDialogText:state.dialogsPage.newDialogText
+        newDialogText:state.dialogsPage.newDialogText,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps=(dispatch:Dispatch)=>{
