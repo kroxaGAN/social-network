@@ -188,21 +188,9 @@ const mapStateToProps = (state: any) => {
 //     }
 // }
 
-// let AuthRedirectComponent=WithAuthRedirect(UsersAPiComponent)
-//
-// export const UsersContainer = connect<any,any>(mapStateToProps,
-//     {
-//         followSuccess,
-//         unFollowSuccess,
-//         setCurrentPage,
-//         setFollowingInProgress,
-//         getUsers,
-//         unFollow,
-//         follow
-//     }
-// )(AuthRedirectComponent)
+let AuthRedirectComponent=WithAuthRedirect(UsersAPiComponent)
 
-export const UsersContainer = WithAuthRedirect(connect<any,any>(mapStateToProps,
+export const UsersContainer = connect<any,any>(mapStateToProps,
     {
         followSuccess,
         unFollowSuccess,
@@ -212,4 +200,4 @@ export const UsersContainer = WithAuthRedirect(connect<any,any>(mapStateToProps,
         unFollow,
         follow
     }
-)(UsersAPiComponent))
+)(AuthRedirectComponent)

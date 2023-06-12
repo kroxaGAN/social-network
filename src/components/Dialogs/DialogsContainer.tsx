@@ -2,7 +2,7 @@ import React from "react";
 import {addMessageAC, addNewMessageTextAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {AppReducerType} from "../../redux/redux-store";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
@@ -11,8 +11,6 @@ type DialogsPropsType = {
 }
 
 // export const DialogsContainer = (props: DialogsPropsType) => {
-//
-//
 //     return (
 //         <StoreContext.Consumer>
 //             {
@@ -35,7 +33,6 @@ type DialogsPropsType = {
 //                 }
 //             }
 //         </StoreContext.Consumer>
-//
 //     )
 // }
 
@@ -61,4 +58,8 @@ const mapDispatchToProps=(dispatch:Dispatch)=>{
     }
 }
 
-export const DialogsContainer=connect (mapStateToProps,mapDispatchToProps)(AuthRedirectComponent)
+
+
+// export const DialogsContainer=connect (mapStateToProps,mapDispatchToProps)(AuthRedirectComponent)
+export const DialogsContainer:any=compose(connect (mapStateToProps,mapDispatchToProps),WithAuthRedirect)(Dialogs)
+
