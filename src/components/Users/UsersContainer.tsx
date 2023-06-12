@@ -8,6 +8,7 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
 export type ReturnedDataType = {
@@ -187,7 +188,21 @@ const mapStateToProps = (state: any) => {
 //     }
 // }
 
-export const UsersContainer = connect<any,any>(mapStateToProps,
+// let AuthRedirectComponent=WithAuthRedirect(UsersAPiComponent)
+//
+// export const UsersContainer = connect<any,any>(mapStateToProps,
+//     {
+//         followSuccess,
+//         unFollowSuccess,
+//         setCurrentPage,
+//         setFollowingInProgress,
+//         getUsers,
+//         unFollow,
+//         follow
+//     }
+// )(AuthRedirectComponent)
+
+export const UsersContainer = WithAuthRedirect(connect<any,any>(mapStateToProps,
     {
         followSuccess,
         unFollowSuccess,
@@ -197,4 +212,4 @@ export const UsersContainer = connect<any,any>(mapStateToProps,
         unFollow,
         follow
     }
-)(UsersAPiComponent)
+)(UsersAPiComponent))
