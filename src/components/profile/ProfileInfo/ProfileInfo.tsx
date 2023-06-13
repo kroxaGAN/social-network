@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {profileType} from "../../../redux/store";
 import {Preloader} from "../../Common/Preloader/Preloader";
+import ProfileStatus from "../ProfileStatus";
 
 type ProfileInfoPropsType={
     profile:profileType
@@ -20,13 +21,13 @@ export const ProfileInfo = (props:ProfileInfoPropsType) => {
         </div>
         <div className={s.descriptionBlock}>
             ava + description
-
             <img src={props.profile.photos.large} alt={"img"}/>
             <h3>{props.profile.fullName}</h3>
             <div>
                 <input type="checkbox" value={"ищу работу"} checked={props.profile.lookingForAJob}/>
                     ищу работу
             </div>
+            <ProfileStatus status={"hello"}/>
             <input type={"text"} value={props.profile.lookingForAJobDescription}/>
 
         </div>
