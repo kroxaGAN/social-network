@@ -13,7 +13,7 @@ export const Profile = (props:any) => {
     return (
         <div className={s.content}>
             Main content
-            <ProfileInfo  profile={props.profile} />
+            <ProfileInfo  profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus} />
             {/*<MyPostsContainer*/}
             {/*    posts={props.profilePageState.posts}*/}
             {/*    newPostText={props.profilePageState.newPostText}*/}

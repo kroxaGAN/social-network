@@ -1,10 +1,9 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, updateUserStatus} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {AppReducerType} from "../../redux/redux-store";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 type ProfileContainerPropsType = {}
@@ -13,9 +12,11 @@ class ProfileContainer extends React.Component<any, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (userId === undefined) {
-            userId = 2
+            userId = 20680
         }
         this.props.getUserProfile(userId)
+        this.props.getUserStatus(userId)
+
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
         //     userAPI.profile(userId)
         //     .then((res)=>{
@@ -28,7 +29,7 @@ class ProfileContainer extends React.Component<any, any> {
         // if (!this.props.isAuth){return <Redirect to={'/login'}/>}
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status}/>
             </div>
         )
 
@@ -53,6 +54,7 @@ class ProfileContainer extends React.Component<any, any> {
 let mapStateToProps = (state: AppReducerType) => {
     return {
         profile: state.profilePage.profile,
+        status:state.profilePage.status
     }
 }
 
@@ -60,9 +62,9 @@ let mapStateToProps = (state: AppReducerType) => {
 // let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 
 let profileContainer:any= compose(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile,getUserStatus,updateUserStatus}),
     withRouter,
-    WithAuthRedirect
+    // WithAuthRedirect временно коммент
 )(ProfileContainer)
 export default profileContainer
 // export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)

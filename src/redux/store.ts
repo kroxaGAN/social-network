@@ -1,4 +1,4 @@
-import {addPostAC, profileReducer, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
+import {addPostAC, profileReducer, setUserProfileAC, setUserStatus, updateNewPostTextAC} from "./profile-reducer";
 import {addMessageAC, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
 import {setAuthUserDataAC} from "./auth-reducer";
@@ -41,7 +41,8 @@ export type profileType={
 export type profilePageType = {
     posts: PostType[],
     newPostText: string,
-    profile:profileType
+    profile:profileType,
+    status:string
 }
 export type dialogsPageType = {
     messages: MessageType[],
@@ -86,7 +87,8 @@ export let store = {
                 "photos": {
                     "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                     "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-                }}
+                }},
+            status:""
         },
         dialogsPage: {
             messages: [
@@ -190,6 +192,6 @@ export let store = {
 
 export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof setUserProfileAC>
-    | ReturnType<typeof setAuthUserDataAC>
+    | ReturnType<typeof setAuthUserDataAC> | ReturnType<typeof setUserStatus>
 
 // window.store=store;

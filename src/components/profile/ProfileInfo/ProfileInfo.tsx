@@ -6,13 +6,14 @@ import ProfileStatus from "../ProfileStatus";
 
 type ProfileInfoPropsType={
     profile:profileType
+    status:string
+    updateUserStatus:()=>void
 }
 
 export const ProfileInfo = (props:ProfileInfoPropsType) => {
     if (!props.profile){
         return <Preloader/>
     }
-
        return <>
         <div className={s.imgWrapper}>
             <img
@@ -27,7 +28,7 @@ export const ProfileInfo = (props:ProfileInfoPropsType) => {
                 <input type="checkbox" value={"ищу работу"} checked={props.profile.lookingForAJob}/>
                     ищу работу
             </div>
-            <ProfileStatus status={"hello"}/>
+            <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
             <input type={"text"} value={props.profile.lookingForAJobDescription}/>
 
         </div>

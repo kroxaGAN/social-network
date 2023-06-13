@@ -1,6 +1,6 @@
 import {ActionType, profilePageType} from "./store";
 import {Dispatch} from "redux";
-import {userAPI} from "../api/api";
+import {profileAPI, userAPI} from "../api/api";
 
 const initialProfileState={
     posts: [
@@ -10,7 +10,6 @@ const initialProfileState={
     ],
     newPostText: "it-kamasutra",
     profile:{
-
         "aboutMe": "я крут",
         "contacts": {
             "facebook": "facebook.com",
@@ -30,7 +29,8 @@ const initialProfileState={
             "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
             "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
         }
-    }
+    },
+    status:""
 }
 
 
@@ -53,6 +53,9 @@ export const profileReducer=(state:profilePageType=initialProfileState,action:Ac
         case "SET-USER-PROFILE":{
             return {...state,profile:action.profile}
         }
+        case "SET-USER-STATUS":{
+            return{...state,status:action.status}
+        }
         default:
             return state
     }
@@ -73,6 +76,11 @@ export const setUserProfileAC=(profile:any)=>{
         type:"SET-USER-PROFILE", profile: profile
     }as const
 }
+export const setUserStatus=(status:string)=>{
+    return{
+        type:'SET-USER-STATUS',status
+    }as const
+}
 
 export const getUserProfile=(userId:number)=>(dispatch:Dispatch)=>{
     userAPI.profile(userId)
@@ -80,3 +88,18 @@ export const getUserProfile=(userId:number)=>(dispatch:Dispatch)=>{
             dispatch(setUserProfileAC(res.data))
         })
 }
+export const getUserStatus=(userId:number)=>(dispatch:Dispatch)=>{
+    profileAPI.getStatus(userId)
+        .then(response=>{
+            dispatch(setUserStatus(response.data))
+        })
+}
+export const updateUserStatus=(status:string)=>(dispatch:Dispatch)=>{
+    profileAPI.updateStatus(status)
+        .then(response=>{
+            if (response.data.resultCode===0){
+                dispatch(setUserStatus(status))
+            }
+        })
+}
+

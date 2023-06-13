@@ -21,9 +21,8 @@ export const userAPI={
     //     )
     // },
     profile(userId:number){
-        return(
-            instance.get(`profile/${userId}`)
-        )
+        console.warn('Obsolete metod - old')
+        return profileAPI.getProfile(userId)
     },
     unfollow(userId:number){
         return(
@@ -44,6 +43,17 @@ export const authAPI={
             instance.get(`auth/me`)
         )
     },
+}
+export const profileAPI={
+    getProfile(userId:number){
+       return instance.get(`profile/${userId}`)
+    },
+    getStatus(userId:number){
+        return instance.get(`/profile/status/${userId}`)
+    },
+    updateStatus(status:string){
+        return instance.put(`/profile/status`,{status})
+    }
 }
 
 
