@@ -28,6 +28,9 @@ export const authReducer = (state: initialAuthStateType = initialAuthState, acti
                 ...action.data,
             }
         }
+        case "DELETE-LOGOUT":{
+            return {...state,...initialAuthState}
+        }
         default:
             return state
     }
@@ -39,6 +42,11 @@ export const setAuthUserDataAC = ( id: number ,login: string,email: string,isAut
         data:{id,login,email,isAuth}
     } as const
 }
+export const deleteLogout=()=>{
+    return{
+        type:"DELETE-LOGOUT"
+    }as const
+}
 
 export const getAuthUserData=()=>(dispatch:Dispatch)=>{
     authAPI.me()
@@ -49,7 +57,7 @@ export const getAuthUserData=()=>(dispatch:Dispatch)=>{
             }
         })
 }
-export const authLogin=(data:AuthDataType)=>((dispatch:Dispatch)=>{
+export const authLogin=(data:AuthDataType)=>(dispatch:Dispatch)=>{
     authAPI.login(data)
         .then((res)=>{
             if(res.data.resultCode===0){
@@ -62,4 +70,12 @@ export const authLogin=(data:AuthDataType)=>((dispatch:Dispatch)=>{
                     })
             }
         })
-})
+}
+export const logOut=()=>(dispatch:Dispatch)=>{
+    authAPI.logout()
+        .then((res)=>{
+            if(res.data.resultCode===0){
+                dispatch(deleteLogout())
+            }
+        })
+}

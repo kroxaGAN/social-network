@@ -19,7 +19,8 @@ export const Profile = (props:any) => {
             {/*    newPostText={props.profilePageState.newPostText}*/}
             {/*    dispatch={props.dispatch}*/}
             {/*/>*/}
-            <MyPostsContainer />
+            {props.isAuth && <MyPostsContainer />}
+            {!props.isAuth && <h1>Выполни вход</h1>}
             {/*<MyPostsContainer store={props.store}/>*/}
 
         </div>

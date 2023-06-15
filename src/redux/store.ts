@@ -1,7 +1,7 @@
 import {addPostAC, profileReducer, setUserProfileAC, setUserStatus, updateNewPostTextAC} from "./profile-reducer";
-import {addMessageAC, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
+import {addMessageAC, addMessageActionCreator, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
-import {setAuthUserDataAC} from "./auth-reducer";
+import {deleteLogout, setAuthUserDataAC} from "./auth-reducer";
 
 export type MessageType = {
     id: number, message: string
@@ -192,6 +192,7 @@ export let store = {
 
 export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof setUserProfileAC>
-    | ReturnType<typeof setAuthUserDataAC> | ReturnType<typeof setUserStatus>
+    | ReturnType<typeof setAuthUserDataAC> | ReturnType<typeof setUserStatus> | ReturnType<typeof deleteLogout>
+| ReturnType<typeof addMessageActionCreator>
 
 // window.store=store;

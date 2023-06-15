@@ -48,6 +48,9 @@ export const authAPI={
         return (
             instance.post(`auth/login`,data)
         )
+    },
+    logout(){
+       return  instance.delete(`auth/login`)
     }
 }
 export const profileAPI={

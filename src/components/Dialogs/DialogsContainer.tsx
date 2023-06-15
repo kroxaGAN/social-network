@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessageAC, addNewMessageTextAC} from "../../redux/dialogs-reducer";
+import {addMessageAC, addMessageActionCreator, addNewMessageTextAC} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -54,7 +54,8 @@ const mapDispatchToProps=(dispatch:Dispatch)=>{
 
     return {
         addNewMessageHandler: ()=>dispatch(addMessageAC()),
-        addNewMessage:(message:string)=>{dispatch(addNewMessageTextAC(message))}
+        addNewMessage:(message:string)=>{dispatch(addNewMessageTextAC(message))},
+        newMessageADD:(message:string)=>{dispatch(addMessageActionCreator(message))}
     }
 }
 

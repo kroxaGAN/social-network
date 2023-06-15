@@ -34,6 +34,11 @@ export const dialogsReducer = (state: dialogsPageType=initialDialogsState, actio
             stateCopy={...state,newDialogText:action.text}
             return stateCopy
         }
+        case "MESSAGE-NEW-ADD":{
+            const newMessage = {id: 4, message: action.text}
+            stateCopy={...state,messages:[...state.messages,newMessage]}
+            return stateCopy
+        }
         default:
             return state
     }
@@ -44,7 +49,13 @@ export const addMessageAC = () => {
         type: "ADD-MESSAGE"
     } as const
 }
+export const addMessageActionCreator = (text: string) => {
+    return {
+        type: "MESSAGE-NEW-ADD",text
+    } as const
+}
 export const addNewMessageTextAC = (text: string) => {
+    debugger
     return {
         type: "ADD-NEW-MESSAGE-TEXT", text
     } as const
