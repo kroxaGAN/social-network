@@ -9,7 +9,7 @@ import {NavbarContainer} from "./components/navbar/NavbarContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import LoginContainer from "./components/Login/LoginContainer";
 
 export type AppPropsType = {
     // store: StoreType
@@ -46,7 +46,7 @@ function App(props: AppPropsType) {
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
                 <Route path={'/users'} render={() => <UsersContainer/>}/>
-                <Route path={'/login'} render={() => <Login/>}/>
+                <Route path={'/login'} render={() => <LoginContainer/>}/>
             </div>
 
         </div>
