@@ -32,6 +32,7 @@ export const Login=(props:any)=>{
                         type="email"
                         onChange={formik.handleChange}
                         value={formik.values.email}
+
                     />
                     <label htmlFor="email">Email Address</label>
                 </div>

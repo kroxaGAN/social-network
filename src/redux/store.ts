@@ -1,4 +1,11 @@
-import {addPostAC, profileReducer, setUserProfileAC, setUserStatus, updateNewPostTextAC} from "./profile-reducer";
+import {
+    addNewPostAC,
+    addPostAC,
+    profileReducer,
+    setUserProfileAC,
+    setUserStatus,
+    updateNewPostTextAC
+} from "./profile-reducer";
 import {addMessageAC, addMessageActionCreator, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
 import {deleteLogout, setAuthUserDataAC} from "./auth-reducer";
@@ -193,6 +200,6 @@ export let store = {
 export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
     ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setAuthUserDataAC> | ReturnType<typeof setUserStatus> | ReturnType<typeof deleteLogout>
-| ReturnType<typeof addMessageActionCreator>
+| ReturnType<typeof addMessageActionCreator> | ReturnType<typeof addNewPostAC>
 
 // window.store=store;

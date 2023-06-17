@@ -15,6 +15,9 @@ type DialogsPropsType = {
     messages:MessageType[],
     isAuth:boolean
 }
+type FormikErrorType = {
+    inputText?: string
+}
 
 export const Dialogs = (props: DialogsPropsType) => {
     let dialogsElement = props.dialogs.map((d) =>
@@ -23,7 +26,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     let messagesElement = props.messages.map((m) =>
         <Message key={m.id} message={m.message}/>
     )
-    let newMessageTextarea=React.createRef<HTMLTextAreaElement>()
+    // let newMessageTextarea=React.createRef<HTMLTextAreaElement>()
 
 
     if (!props.isAuth){
@@ -64,6 +67,15 @@ const AddMessageForm=(props:{putNewMessage:(message:string)=>void})=>{
         initialValues: {
             inputText: '',
         },
+        validate: (values) => {
+            const errors: FormikErrorType = {}
+            if (!values.inputText) {
+                errors.inputText = 'Required';
+            } else if (values.inputText.length >10 ) {
+                errors.inputText = 'Must be 10 characters or less';
+            }
+            return errors
+        },
         onSubmit: values => {
             props.putNewMessage(values.inputText)
            formik.resetForm()
@@ -77,11 +89,16 @@ const AddMessageForm=(props:{putNewMessage:(message:string)=>void})=>{
                     name="inputText"
                     type="text"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.inputText}
                 />
+                {formik.errors.inputText &&  formik.touched.inputText  && <div style={{color:'red'}}>{formik.errors.inputText}</div>}
             </div>
             <div>
-                <button type="submit">Add message</button>
+                <button
+                    type="submit"
+                    disabled={Object.keys(formik.errors).length !== 0}
+                >Add message</button>
             </div>
         </form>
     )

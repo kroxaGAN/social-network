@@ -45,6 +45,13 @@ export const profileReducer=(state:profilePageType=initialProfileState,action:Ac
             copyState.newPostText = ''
             return copyState
         }
+        case "ADD_NEW_POST":{
+            let newPost = {id: 4, message: action.post, countLikes: 0}
+            const copyState={...state}
+            copyState.posts=[...state.posts]
+            copyState.posts.push(newPost)
+            return copyState
+        }
         case "UPDATE-NEW-POST-TEXT": {
             const copyState={...state}
             copyState.newPostText = action.text
@@ -70,6 +77,12 @@ export const updateNewPostTextAC = (text: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT", text
     } as const
+}
+export const addNewPostAC=(post:string)=>{
+    return {
+        type:"ADD_NEW_POST",
+        post
+    }as const
 }
 export const setUserProfileAC=(profile:any)=>{
     return{

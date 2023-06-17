@@ -7,6 +7,7 @@ import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
+import {Redirect} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
@@ -14,7 +15,7 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-export const Login1=()=>{
+export const Login1=(props:any)=>{
     // const dispatch=useAppDispatch()
     // const isLoggedIn=useAppSelector<boolean>(state=>state.auth.isLoggedIn)
 
@@ -41,16 +42,17 @@ export const Login1=()=>{
             return errors
         },
         onSubmit: values => {
-            // authAPI.login(values)
-            //     .then((res)=>{
-            //         console.log(res.data.data)
-            //     })
-            // // alert(JSON.stringify(values));
-            // formik.resetForm()
-            // // dispatch(loginTC(values))
+            props.authLogin({
+                email: values.email,
+                password:values.password,
+                rememberMe:values.rememberMe
+            })
         },
     })
-
+    if(props.isAuth){
+        return <Redirect to={'/profile'}/>
+    }
+    console.log({...formik.getFieldProps('email')})
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <form onSubmit={formik.handleSubmit}>
