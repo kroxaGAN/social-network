@@ -1,12 +1,12 @@
 import React from "react";
 import {Header} from "./Header";
-import {getAuthUserData, logOut} from "../../redux/auth-reducer";
+import { logOut} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {AppReducerType} from "../../redux/redux-store";
 
  class HeaderContainer extends React.Component<any, any>{
     componentDidMount() {
-        this.props.getAuth()
+        // this.props.getAuth()
         // axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`,{withCredentials:true})
         // userAPI.auth()
         // .then((res)=>{
@@ -29,4 +29,4 @@ let mapStateToProps=(state:AppReducerType)=>{
      }
  }
 
-export default connect(mapStateToProps,{getAuth: getAuthUserData, logOut})(HeaderContainer)
+export default connect(mapStateToProps,{logOut})(HeaderContainer)

@@ -12,7 +12,10 @@ class ProfileContainer extends React.Component<any, any> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (userId === undefined) {
-            userId = 20680
+            userId = this.props.authorizedUserId
+            if (!userId){
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
@@ -54,7 +57,8 @@ let mapStateToProps = (state: AppReducerType) => {
     return {
         profile: state.profilePage.profile,
         status:state.profilePage.status,
-        isAuth:state.auth.isAuth
+        isAuth:state.auth.isAuth,
+        authorizedUserId:state.auth.id
     }
 }
 
@@ -64,7 +68,7 @@ let mapStateToProps = (state: AppReducerType) => {
 let profileContainer:any= compose(
     connect(mapStateToProps, {getUserProfile,getUserStatus,updateUserStatus}),
     withRouter,
-    // WithAuthRedirect временно коммент
+    // WithAuthRedirect //временно коммент
 )(ProfileContainer)
 export default profileContainer
 // export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)

@@ -3,13 +3,13 @@ import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 const initialAuthState = {
-    id: 10000,
+    id: null,
     login: "null",
     email: "null",
     isAuth:false
 }
 export type initialAuthStateType = {
-    id: number ,
+    id: number | null,
     login: string,
     email: string,
     isAuth:boolean
@@ -49,7 +49,7 @@ export const deleteLogout=()=>{
 }
 
 export const getAuthUserData=()=>(dispatch:Dispatch)=>{
-    authAPI.me()
+   return authAPI.me()
         .then((res)=>{
             if(res.data.resultCode===0){
                 let {id, login, email}=res.data.data

@@ -6,13 +6,15 @@ import {sideBarReducer} from "./sideBar-reducer";
 import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import thunk from "redux-thunk";
+import {appReducer} from "./app-reducer";
 
 let reducers=combineReducers({
     profilePage:profileReducer,
     dialogsPage:dialogsReducer,
     sideBar:sideBarReducer,
     usersFind:usersReducer,
-    auth:authReducer
+    auth:authReducer,
+    app:appReducer
 })
 
 export type AppReducerType=ReturnType<typeof reducers>

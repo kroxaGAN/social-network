@@ -9,6 +9,7 @@ import {
 import {addMessageAC, addMessageActionCreator, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
 import {deleteLogout, setAuthUserDataAC} from "./auth-reducer";
+import {initializedSuccess} from "./app-reducer";
 
 export type MessageType = {
     id: number, message: string
@@ -23,7 +24,7 @@ export type FriendType = {
     id: number, name: string, avatar: string
 }
 
-export type profileType={
+export type profileType = {
 
     "aboutMe": string,
     "contacts": {
@@ -48,8 +49,8 @@ export type profileType={
 export type profilePageType = {
     posts: PostType[],
     newPostText: string,
-    profile:profileType,
-    status:string
+    profile: profileType,
+    status: string
 }
 export type dialogsPageType = {
     messages: MessageType[],
@@ -94,8 +95,9 @@ export let store = {
                 "photos": {
                     "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                     "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-                }},
-            status:""
+                }
+            },
+            status: ""
         },
         dialogsPage: {
             messages: [
@@ -170,9 +172,9 @@ export let store = {
     //     this._subscribe(this._state)
     // },
     dispatch(action: ActionType) {
-        this._state.profilePage=profileReducer(this._state.profilePage,action)
-        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
-        this._state.sideBar=sideBarReducer(this._state.sideBar,action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action)
         this._subscribe(this._state)
 
         // if (action.type === "ADD-POST") {
@@ -197,9 +199,17 @@ export let store = {
     }
 }
 
-export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> |
-    ReturnType<typeof addMessageAC> | ReturnType<typeof addNewMessageTextAC> | ReturnType<typeof setUserProfileAC>
-    | ReturnType<typeof setAuthUserDataAC> | ReturnType<typeof setUserStatus> | ReturnType<typeof deleteLogout>
-| ReturnType<typeof addMessageActionCreator> | ReturnType<typeof addNewPostAC>
+export type ActionType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    |ReturnType<typeof addMessageAC>
+    | ReturnType<typeof addNewMessageTextAC>
+    | ReturnType<typeof setUserProfileAC>
+    | ReturnType<typeof setAuthUserDataAC>
+    | ReturnType<typeof setUserStatus>
+    | ReturnType<typeof deleteLogout>
+    | ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof addNewPostAC>
+    | ReturnType<typeof initializedSuccess>
 
 // window.store=store;
