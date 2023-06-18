@@ -1,5 +1,6 @@
 import {useFormik} from "formik";
 import {Redirect} from "react-router-dom";
+import s from "./Login.module.css"
 
 
 export const Login=(props:any)=>{
@@ -9,18 +10,23 @@ export const Login=(props:any)=>{
             password:'',
             rememberMe:false
         },
-        onSubmit: values => {
+        onSubmit: (values,submitProps) => {
             // alert(JSON.stringify(values, null, 2));
             props.authLogin({
                 email: values.email,
                 password:values.password,
                 rememberMe:values.rememberMe
-            })
+            },submitProps.setStatus)
         },
     });
     if(props.isAuth){
         return <Redirect to={'/profile'}/>
     }
+    if(formik.status){
+        console.log(formik.status.error)
+    }
+
+
     return(
         <div>
             <h1>Login</h1>
@@ -57,7 +63,15 @@ export const Login=(props:any)=>{
                     />
                     <label>Remember me</label>
                 </div>
-
+                    <div className={s.error}>
+                        {formik.status && formik.status.error.map((er:any, index:any) => <p key={index}>{er}</p>)}
+                    </div>
+            {/*    let apiErrors*/}
+            {/*    if(formik.status) {*/}
+            {/*    //console.log(formik.status.error)*/}
+            {/*    apiErrors = formik.status.error.map((item, index) => <p key={index}>{item}</p>)*/}
+            {/*}*/}
+{/*//look at youtube in commentas after lesson*/}
                 <button type="submit">Login</button>
             </form>
         </div>

@@ -57,10 +57,11 @@ export const getAuthUserData=()=>(dispatch:Dispatch)=>{
             }
         })
 }
-export const authLogin=(data:AuthDataType)=>(dispatch:Dispatch)=>{
+export const authLogin=(data:AuthDataType,setStatus:any)=>(dispatch:Dispatch)=>{
     authAPI.login(data)
         .then((res)=>{
             if(res.data.resultCode===0){
+                // dispatch(getAuthUserData()) не работает!!!!потому и ниже
                 authAPI.me()
                     .then((res)=>{
                         if(res.data.resultCode===0){
@@ -68,6 +69,8 @@ export const authLogin=(data:AuthDataType)=>(dispatch:Dispatch)=>{
                             dispatch(setAuthUserDataAC(id, login, email,true))
                         }
                     })
+            }else {
+                setStatus({error: res.data.messages})
             }
         })
 }
