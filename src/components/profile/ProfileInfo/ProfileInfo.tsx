@@ -2,12 +2,12 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {profileType} from "../../../redux/store";
 import {Preloader} from "../../Common/Preloader/Preloader";
-import ProfileStatus from "../ProfileStatus";
+import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks";
 
 type ProfileInfoPropsType={
     profile:profileType
     status:string
-    updateUserStatus:()=>void
+    updateUserStatus:(status:string)=>void
 }
 
 export const ProfileInfo = (props:ProfileInfoPropsType) => {
@@ -28,7 +28,8 @@ export const ProfileInfo = (props:ProfileInfoPropsType) => {
                 <input type="checkbox" value={"ищу работу"} checked={props.profile.lookingForAJob}/>
                     ищу работу
             </div>
-            <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+            <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
+            {/*<ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>*/}
             <input type={"text"} value={props.profile.lookingForAJobDescription}/>
 
         </div>
