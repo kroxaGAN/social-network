@@ -106,24 +106,18 @@ export const deletePostAC=(postId:number)=>{
     }as const
 }
 
-export const getUserProfile=(userId:number)=>(dispatch:Dispatch)=>{
-    userAPI.profile(userId)
-        .then((res)=>{
+export const getUserProfile=(userId:number)=>async (dispatch:Dispatch)=>{
+    const res=await userAPI.profile(userId)
             dispatch(setUserProfileAC(res.data))
-        })
 }
-export const getUserStatus=(userId:number)=>(dispatch:Dispatch)=>{
-    profileAPI.getStatus(userId)
-        .then(response=>{
+export const getUserStatus=(userId:number)=>async (dispatch:Dispatch)=>{
+    const response=await profileAPI.getStatus(userId)
             dispatch(setUserStatus(response.data))
-        })
 }
-export const updateUserStatus=(status:string)=>(dispatch:Dispatch)=>{
-    profileAPI.updateStatus(status)
-        .then(response=>{
+export const updateUserStatus=(status:string)=>async (dispatch:Dispatch)=>{
+    const response=await profileAPI.updateStatus(status)
             if (response.data.resultCode===0){
                 dispatch(setUserStatus(status))
             }
-        })
 }
 
