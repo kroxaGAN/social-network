@@ -21,7 +21,6 @@ export const ProfileStatusWithHooks = (props: PropsType) => {
     }
 
     useEffect(()=>{
-        debugger
         setStatus(props.status)
     },[props.status])
 

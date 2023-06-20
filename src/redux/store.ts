@@ -1,6 +1,6 @@
 import {
     addNewPostAC,
-    addPostAC,
+    addPostAC, deletePostAC,
     profileReducer,
     setUserProfileAC,
     setUserStatus,
@@ -211,5 +211,6 @@ export type ActionType =
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof addNewPostAC>
     | ReturnType<typeof initializedSuccess>
+| ReturnType<typeof deletePostAC>
 
 // window.store=store;

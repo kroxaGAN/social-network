@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import { PostType} from "../../../redux/store";
@@ -16,10 +16,10 @@ type FormikErrorType = {
 }
 
 
-export const MyPosts = (props:MyPostsProps) => {
+export const MyPosts =memo((props:MyPostsProps) => {
 
     let postsElements=props.posts.map(p =>
-         <Post
+        <Post
             key={p.id}
             message={p.message}
             countLikes={p.countLikes}
@@ -28,7 +28,7 @@ export const MyPosts = (props:MyPostsProps) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     const addPost=()=>{
-            props.addPost()
+        props.addPost()
     }
     const onPostChange=()=>{
         const text=newPostElement.current?.value
@@ -39,6 +39,7 @@ export const MyPosts = (props:MyPostsProps) => {
     const addNewPost=(post:string)=>{
         props.addNewPostAC(post)
     }
+    console.log("RENDER")
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
@@ -48,7 +49,7 @@ export const MyPosts = (props:MyPostsProps) => {
             {postsElements}
         </div>
     )
-}
+})
 
 const AddNewPostForm=(props:{ addNewPost:(post:string)=>void})=>{
     const formik = useFormik({
