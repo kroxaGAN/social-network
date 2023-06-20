@@ -100,6 +100,8 @@ class UsersAPiComponent extends React.Component<any,any> {
                     unFollow={this.props.unFollow}
                     isFetching={this.props.isFetching}
                     followingInProgress={this.props.followingInProgress}
+                    setCurrentPage={this.props.setCurrentPage}
+                    requestUsers={this.props.requestUsers}
                     // setFollowingInProgress={this.props.setFollowingInProgress}
                 />}
         </>
@@ -215,6 +217,6 @@ export const UsersContainer = connect<any,any>(mapStateToProps,
         setFollowingInProgress,
         requestUsers,
         unFollow,
-        follow
+        follow,
     }
 )(UsersAPiComponent)

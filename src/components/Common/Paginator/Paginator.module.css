@@ -7,5 +7,6 @@
 }
 .notSelectedPage{
     cursor: pointer;
-    padding: 5px;
+    padding: 5px 0 5px 5px;
+    border: 1px solid grey;
 }

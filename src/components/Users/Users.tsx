@@ -1,6 +1,7 @@
 import {userType} from "../../redux/users-reducer";
 import {Paginator} from "../Common/Paginator/Paginator";
 import {User} from "./User";
+import s from "./Users.module.css"
 
 type UsersProps = {
     totalUsersCount: number,
@@ -12,6 +13,8 @@ type UsersProps = {
     follow: (userId: number) => void,
     unFollow: (userId: number) => void,
     followingInProgress: Array<number>,
+    setCurrentPage:(page: number)=>void,
+    requestUsers:(pageSize:number,currentPage: number)=>void
     // setFollowingInProgress: (userId:number,value: boolean) => void
 
     // setUsers: (users: userType[]) => void,
@@ -40,12 +43,18 @@ export const Users = (props: UsersProps) => {
             {/*    }*/}
             {/*</div>*/}
 
-            <Paginator
-                totalUsersCount={props.totalUsersCount}
-                pageSize={props.pageSize}
-                currentPage={props.currentPage}
-                onPageChanged={props.onPageChanged}
-            />
+            <div className={s.paginatorNumber}>
+                <Paginator
+                    totalItemsCount={props.totalUsersCount}
+                    pageSize={props.pageSize}
+                    currentPage={props.currentPage}
+                    onPageChanged={props.onPageChanged}
+                    portionSize={10}
+                    setCurrentPage={props.setCurrentPage}
+                    requestUsers={props.requestUsers}
+                />
+
+            </div>
 
             <h3>Users</h3>
             {/*{this.props.usersState.length===0 && <button onClick={this.getUsersHandler}>Get users</button>}*/}
