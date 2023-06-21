@@ -7,13 +7,14 @@ import {Redirect} from "react-router-dom";
 import {useFormik} from "formik";
 
 type DialogsPropsType = {
-    addNewMessage:(text:string)=>void,
-    newMessageADD:(text:string)=>void,
-    addNewMessageHandler:()=>void,
+    // addNewMessage:(text:string)=>void,
+    // newMessageADD:(text:string)=>void,
+    // addNewMessageHandler:()=>void,
     newDialogText:string,
     dialogs:DialogType[],
     messages:MessageType[],
-    isAuth:boolean
+    isAuth:boolean,
+    addMessageActionCreator:(text:string)=>void
 }
 type FormikErrorType = {
     inputText?: string
@@ -33,8 +34,8 @@ export const Dialogs = (props: DialogsPropsType) => {
         return  <Redirect to={"/login"}/>
     }
     const putNewMessage=(message:string)=>{
-        props.newMessageADD(message)
-
+        // props.newMessageADD(message)
+        props.addMessageActionCreator(message)
     }
 
     return (
