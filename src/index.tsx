@@ -2,14 +2,14 @@ import React from 'react';
 import './index.css';
 import App from "./App";
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {store} from "./redux/redux-store";
 import { Provider } from 'react-redux';
 
 // let rerenderEntireTree = () => {
 
     ReactDOM.render(
-        <BrowserRouter>
+        <HashRouter>
         <Provider store={store}>
             <App
                 // store={store}
@@ -22,7 +22,7 @@ import { Provider } from 'react-redux';
             />
         </Provider>
 
-        </BrowserRouter>,
+        </HashRouter>,
         document.getElementById('root')
     );
 // }
