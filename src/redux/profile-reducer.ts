@@ -69,6 +69,12 @@ export const profileReducer=(state:profilePageType=initialProfileState,action:Ac
                 posts:state.posts.filter(p=>p.id!==action.postId)
             }
         }
+        case "SAVE-PHOTO":{
+            return{
+                ...state,
+                profile:{...state.profile,photos:action.photos}
+            }
+        }
         default:
             return state
     }
@@ -106,6 +112,12 @@ export const deletePostAC=(postId:number)=>{
     }as const
 }
 
+export const setUserPhoto=(photos:any)=>{
+    return{
+        type:"SAVE-PHOTO",photos
+    }as const
+}
+
 export const getUserProfile=(userId:number)=>async (dispatch:Dispatch)=>{
     const res=await userAPI.profile(userId)
             dispatch(setUserProfileAC(res.data))
@@ -119,5 +131,11 @@ export const updateUserStatus=(status:string)=>async (dispatch:Dispatch)=>{
             if (response.data.resultCode===0){
                 dispatch(setUserStatus(status))
             }
+}
+export const savePhotos=(file:any)=>async (dispatch:Dispatch)=>{
+    const response=await profileAPI.updatePhoto(file)
+    if (response.data.resultCode===0){
+        dispatch(setUserPhoto(response.data.data.photos))
+    }
 }
 

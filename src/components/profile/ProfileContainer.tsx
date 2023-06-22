@@ -1,7 +1,7 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile, getUserStatus, updateUserStatus} from "../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, savePhotos, updateUserStatus} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {AppReducerType} from "../../redux/redux-store";
 import {compose} from "redux";
@@ -9,16 +9,19 @@ import {compose} from "redux";
 type ProfileContainerPropsType = {}
 
 class ProfileContainer extends React.Component<any, any> {
+     refreshProfile(){
+         let userId = this.props.match.params.userId
+         if (userId === undefined) {
+             userId = this.props.authorizedUserId
+             if (!userId){
+                 this.props.history.push('/login')
+             }
+         }
+         this.props.getUserProfile(userId)
+         this.props.getUserStatus(userId)
+    }
     componentDidMount() {
-        let userId = this.props.match.params.userId
-        if (userId === undefined) {
-            userId = this.props.authorizedUserId
-            if (!userId){
-                this.props.history.push('/login')
-            }
-        }
-        this.props.getUserProfile(userId)
-        this.props.getUserStatus(userId)
+        this.refreshProfile()
 
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
         //     userAPI.profile(userId)
@@ -27,11 +30,25 @@ class ProfileContainer extends React.Component<any, any> {
         //     })
     }
 
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+         if(this.props.match.params.userId!==prevProps.match.params.userId){
+             this.refreshProfile()
+         }
+    }
+
     render() {
         // if (!this.props.isAuth){return <Redirect to={'/login'}/>}
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} status={this.props.status}/>
+                <Profile
+                    {...this.props}
+                    profile={this.props.profile}
+                    status={this.props.status}
+                    isOwner={!this.props.match.params.userId}
+                    isAuth={this.props.isAuth}
+                    updateUserStatus={this.props.updateUserStatus}
+                    savePhotos={this.props.savePhotos}
+                />
             </div>
         )
 
@@ -66,7 +83,8 @@ let mapStateToProps = (state: AppReducerType) => {
 // let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 
 let profileContainer:any= compose(
-    connect(mapStateToProps, {getUserProfile,getUserStatus,updateUserStatus}),
+    connect(mapStateToProps, {getUserProfile,
+        getUserStatus,updateUserStatus,savePhotos}),
     withRouter,
     // WithAuthRedirect //временно коммент
 )(ProfileContainer)

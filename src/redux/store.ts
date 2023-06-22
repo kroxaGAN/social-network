@@ -1,7 +1,7 @@
 import {
     addNewPostAC,
     addPostAC, deletePostAC,
-    profileReducer,
+    profileReducer, setUserPhoto,
     setUserProfileAC,
     setUserStatus,
     updateNewPostTextAC
@@ -202,7 +202,7 @@ export let store = {
 export type ActionType =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
-    |ReturnType<typeof addMessageAC>
+    | ReturnType<typeof addMessageAC>
     | ReturnType<typeof addNewMessageTextAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setAuthUserDataAC>
@@ -211,6 +211,7 @@ export type ActionType =
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof addNewPostAC>
     | ReturnType<typeof initializedSuccess>
-| ReturnType<typeof deletePostAC>
+    | ReturnType<typeof deletePostAC>
+    | ReturnType<typeof setUserPhoto>
 
 // window.store=store;

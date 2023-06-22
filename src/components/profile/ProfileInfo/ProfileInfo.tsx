@@ -1,18 +1,27 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './ProfileInfo.module.css'
 import {profileType} from "../../../redux/store";
 import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "../ProfileStatusWithHooks";
+import defPhoto from "../../../Isses/Images/defPhoto.png"
 
 type ProfileInfoPropsType={
     profile:profileType
     status:string
     updateUserStatus:(status:string)=>void
+    isOwner: boolean
+    savePhotos:(file:any)=>void
 }
 
 export const ProfileInfo = (props:ProfileInfoPropsType) => {
     if (!props.profile){
         return <Preloader/>
+    }
+    const onMainPhotoSelected=(e:ChangeEvent<HTMLInputElement>)=>{
+     if (e.currentTarget.files?.length){
+         // console.log(e.currentTarget.files[0])
+         props.savePhotos(e.currentTarget.files[0])
+     }
     }
        return <>
         <div className={s.imgWrapper}>
@@ -22,7 +31,8 @@ export const ProfileInfo = (props:ProfileInfoPropsType) => {
         </div>
         <div className={s.descriptionBlock}>
             ava + description
-            <img src={props.profile.photos.large} alt={"img"}/>
+            <img src={props.profile.photos.large || defPhoto} alt={"img"} className={s.mainPhoto}/>
+            {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
             <h3>{props.profile.fullName}</h3>
             <div>
                 <input type="checkbox" value={"ищу работу"} checked={props.profile.lookingForAJob}/>
