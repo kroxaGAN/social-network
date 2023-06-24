@@ -46,6 +46,23 @@ export type profileType = {
         "large": string
     }
 }
+export type profileUpdateType = {
+    "aboutMe": string,
+    "contacts": {
+        "facebook": string,
+        "website": null,
+        "vk": string,
+        "twitter": string,
+        "instagram": string,
+        "youtube": null,
+        "github": string,
+        "mainLink": null
+    },
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+}
 export type profilePageType = {
     posts: PostType[],
     newPostText: string,

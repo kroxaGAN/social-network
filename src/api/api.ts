@@ -1,6 +1,7 @@
 import axios from "axios";
 import {ReturnedDataType} from "../components/Users/UsersContainer";
 import {AuthDataType} from "../redux/auth-reducer";
+import { profileUpdateType} from "../redux/store";
 
 
 const instance=axios.create({
@@ -71,7 +72,10 @@ export const profileAPI={
                 'Content-Type': 'multipart/form-data'
             }
         })
-    }
+    },
+    saveUserData(profileData:profileUpdateType){
+        return instance.put(`/profile`,profileData)
+    },
 }
 
 

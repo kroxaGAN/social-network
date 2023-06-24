@@ -3,6 +3,7 @@ import s from "./Profile.module.css"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {profileType} from "../../redux/store";
+import {ValuesProfileType} from "./ProfileInfo/ProfileDataForm";
 
 type ProfilePropsType = {
     // profilePageState:{posts:PostType[], newPostText:string}
@@ -14,6 +15,7 @@ type ProfilePropsType = {
     isAuth:boolean
     updateUserStatus:(status:string)=>void
     savePhotos:()=>void
+    saveUser:(profileData:ValuesProfileType)=>void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -26,6 +28,7 @@ export const Profile = (props: ProfilePropsType) => {
                 updateUserStatus={props.updateUserStatus}
                 isOwner={props.isOwner}
                 savePhotos={props.savePhotos}
+                saveUser={props.saveUser}
             />
 
             {/*<MyPostsContainer*/}

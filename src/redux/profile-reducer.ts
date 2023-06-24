@@ -1,4 +1,4 @@
-import {ActionType, profilePageType} from "./store";
+import {ActionType, profilePageType,  profileUpdateType} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI, userAPI} from "../api/api";
 
@@ -138,4 +138,10 @@ export const savePhotos=(file:any)=>async (dispatch:Dispatch)=>{
         dispatch(setUserPhoto(response.data.data.photos))
     }
 }
-
+export const saveUser=(profileData:profileUpdateType)=>async (dispatch:Dispatch)=>{
+    const response=await profileAPI.saveUserData(profileData)
+    if (response.data.resultCode===0){
+        //@ts-ignore
+    dispatch(getUserProfile(profileData.userId))
+    }
+}
