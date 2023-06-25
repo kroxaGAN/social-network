@@ -29,13 +29,13 @@ export type profileType = {
     "aboutMe": string,
     "contacts": {
         "facebook": string,
-        "website": null,
+        "website": string,
         "vk": string,
         "twitter": string,
         "instagram": string,
-        "youtube": null,
+        "youtube": string,
         "github": string,
-        "mainLink": null
+        "mainLink": string
     },
     "lookingForAJob": boolean,
     "lookingForAJobDescription": string,
@@ -97,13 +97,13 @@ export let store = {
                 "aboutMe": "я круто чувак 1001%",
                 "contacts": {
                     "facebook": "facebook.com",
-                    "website": null,
+                    "website": "null",
                     "vk": "vk.com/dimych",
                     "twitter": "https://twitter.com/@sdf",
                     "instagram": "instagra.com/sds",
-                    "youtube": null,
+                    "youtube": "null",
                     "github": "github.com",
-                    "mainLink": null
+                    "mainLink": "null"
                 },
                 "lookingForAJob": true,
                 "lookingForAJobDescription": "не ищу, а дурачусь",

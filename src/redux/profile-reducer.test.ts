@@ -10,13 +10,13 @@ const initialProfileState={
         "aboutMe": "я крут",
         "contacts": {
             "facebook": "facebook.com",
-            "website": null,
+            "website": "null",
             "vk": "vk.com/dimych",
             "twitter": "https://twitter.com/@sdf",
             "instagram": "instagra.com/sds",
-            "youtube": null,
+            "youtube": "null",
             "github": "github.com",
-            "mainLink": null
+            "mainLink": "null"
         },
         "lookingForAJob": true,
         "lookingForAJobDescription": "ищу и дурачусь",

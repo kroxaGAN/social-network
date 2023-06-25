@@ -12,7 +12,7 @@ type ProfileInfoPropsType = {
     updateUserStatus: (status: string) => void
     isOwner: boolean
     savePhotos: (file: any) => void
-    saveUser: (profileData:ValuesProfileType) => void
+    saveUser:(profileData:ValuesProfileType)=>void
 }
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -87,7 +87,7 @@ const ProfileData=(props:{profile:profileType,setEditMode:(editMode:boolean)=>vo
 const Contact = (props: { contactTitle: string , contactValue: string  }) => {
     return (
         <div className={s.contact}>
-            <b>{props.contactTitle}</b>: {props.contactValue ===null && '-----'}
+            <b>{props.contactTitle}</b>: {props.contactValue === "" ? '-----' : props.contactValue}
         </div>
     )
 
