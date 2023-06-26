@@ -144,7 +144,7 @@ export const saveUser=(profileData:profileUpdateType, setStatus: any)=>async (di
         //@ts-ignore
     dispatch(getUserProfile(profileData.userId))
     }else {
-        debugger
         setStatus({error: response.data.messages})
+        return Promise.reject(response.data.messages)
     }
 }

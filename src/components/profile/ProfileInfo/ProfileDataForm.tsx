@@ -18,7 +18,7 @@ export type ValuesProfileType = {
     mainLink: string;
 }
 export const ProfileDataForm = (props: { profile: profileType, setEditMode: (editMode: boolean) => void,
-    saveUser: (profileData: ValuesProfileType, setStatus:()=>void) => void }) => {
+    saveUser: (profileData: ValuesProfileType, setStatus:()=>void) => any }) => {
     const formik = useFormik({
         initialValues: {
             fullName: props.profile.fullName,
@@ -50,10 +50,16 @@ export const ProfileDataForm = (props: { profile: profileType, setEditMode: (edi
                 }
             }
             props.saveUser(profileData, submitProps.setStatus)
-            console.log(formik.status.error)
-            if(formik.status){
-                console.log(formik.status.error)
-            }else {props.setEditMode(false)}
+                .then(()=>{
+                    props.setEditMode(false)
+                })
+                .catch(()=>{
+
+                })
+            // console.log(formik.status.error)
+            // if(formik.status){
+            //     console.log(formik.status.error)
+            // }else {props.setEditMode(false)}
         }
     });
 
