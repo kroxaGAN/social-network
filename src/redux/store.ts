@@ -8,7 +8,7 @@ import {
 } from "./profile-reducer";
 import {addMessageAC, addMessageActionCreator, addNewMessageTextAC, dialogsReducer} from "./dialogs-reducer";
 import {sideBarReducer} from "./sideBar-reducer";
-import {deleteLogout, setAuthUserDataAC} from "./auth-reducer";
+import {deleteLogout, getCaptchaUrlSuccess, setAuthUserDataAC} from "./auth-reducer";
 import {initializedSuccess} from "./app-reducer";
 
 export type MessageType = {
@@ -230,5 +230,6 @@ export type ActionType =
     | ReturnType<typeof initializedSuccess>
     | ReturnType<typeof deletePostAC>
     | ReturnType<typeof setUserPhoto>
+    | ReturnType<typeof getCaptchaUrlSuccess>
 
 // window.store=store;

@@ -1,23 +1,26 @@
 import {ActionType} from "./store";
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 const initialAuthState = {
     id: null,
     login: "null",
     email: "null",
-    isAuth: false
+    isAuth: false,
+    captcha:null
 }
 export type initialAuthStateType = {
     id: number | null,
     login: string,
     email: string,
-    isAuth: boolean
+    isAuth: boolean,
+    captcha: string | null
 }
 export type AuthDataType = {
     email: string,
     password: string,
-    rememberMe: boolean
+    rememberMe: boolean,
+    captcha?: string | null
 }
 
 export const authReducer = (state: initialAuthStateType = initialAuthState, action: ActionType) => {
@@ -30,6 +33,11 @@ export const authReducer = (state: initialAuthStateType = initialAuthState, acti
         }
         case "SAMURAI-NETWORK/AUTH/DELETE-LOGOUT": {
             return {...state, ...initialAuthState}
+        }
+        case "SAMURAI-NETWORK/AUTH/GET-CAPTCHA-URL-SUCCESS":{
+            return {
+                ...state, captcha:action.url
+            }
         }
         default:
             return state
@@ -47,6 +55,12 @@ export const deleteLogout = () => {
         type: "SAMURAI-NETWORK/AUTH/DELETE-LOGOUT"
     } as const
 }
+export const getCaptchaUrlSuccess=(url:string)=>{
+    return{
+        type:"SAMURAI-NETWORK/AUTH/GET-CAPTCHA-URL-SUCCESS",url
+    }as const
+}
+
 
 // export const getAuthUserData=()=>(dispatch:Dispatch)=>{
 //    return authAPI.me()
@@ -96,8 +110,17 @@ export const authLogin = (data: AuthDataType, setStatus: any) => async (dispatch
                 }
             })
     } else {
+        if (res.data.resultCode === 10) {
+            dispatch(getCaptchaUrl())
+        }
         setStatus({error: res.data.messages})
     }
+}
+
+export const getCaptchaUrl:any=()=>async (dispatch:Dispatch)=>{
+    const result= await securityAPI.getCaptchaUrl()
+    const captcha=result.data.url
+    dispatch(getCaptchaUrlSuccess(captcha))
 }
 
 // export const logOut = () => (dispatch: Dispatch) => {
@@ -110,7 +133,7 @@ export const authLogin = (data: AuthDataType, setStatus: any) => async (dispatch
 // }
 export const logOut = () => async (dispatch: Dispatch) => {
     const res = await authAPI.logout()
-            if (res.data.resultCode === 0) {
-                dispatch(deleteLogout())
-            }
+    if (res.data.resultCode === 0) {
+        dispatch(deleteLogout())
+    }
 }

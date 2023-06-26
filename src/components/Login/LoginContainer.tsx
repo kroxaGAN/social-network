@@ -12,12 +12,18 @@ class LoginContainer extends React.Component<any, any> {
     }
 
     render(){
-        return <Login {...this.props}  authLogin={this.props.authLogin}/>
+        return <Login {...this.props}
+                      authLogin={this.props.authLogin}
+                      captcha={this.props.captcha}
+        />
     }
 }
 
 const mapStateToProps=(state: AppReducerType)=>{
-   return{isAuth:state.auth.isAuth}
+   return{
+       isAuth:state.auth.isAuth,
+       captcha:state.auth.captcha
+   }
 }
 
 let loginContainer:any= compose(

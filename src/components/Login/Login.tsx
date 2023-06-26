@@ -8,15 +8,18 @@ export const Login=(props:any)=>{
         initialValues: {
             email: '',
             password:'',
-            rememberMe:false
+            rememberMe:false,
+            captcha:''
         },
         onSubmit: (values,submitProps) => {
             // alert(JSON.stringify(values, null, 2));
             props.authLogin({
                 email: values.email,
                 password:values.password,
-                rememberMe:values.rememberMe
+                rememberMe:values.rememberMe,
+                captcha:values.captcha
             },submitProps.setStatus)
+
         },
     });
     if(props.isAuth){
@@ -72,6 +75,18 @@ export const Login=(props:any)=>{
             {/*    apiErrors = formik.status.error.map((item, index) => <p key={index}>{item}</p>)*/}
             {/*}*/}
 {/*//look at youtube in commentas after lesson*/}
+                <div>
+                    {props.captcha && <img src={props.captcha} alt="captcha"/>}
+                </div>
+                <div>
+                    <input
+                        name="captcha"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.captcha}
+                    />
+                </div>
+
                 <button type="submit">Login</button>
             </form>
         </div>

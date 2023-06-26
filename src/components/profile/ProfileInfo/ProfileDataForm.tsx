@@ -125,15 +125,6 @@ export const ProfileDataForm = (props: { profile: profileType, setEditMode: (edi
                             />
                         </div>
                         <div>
-                            <b>github</b>:
-                            <input
-                                name="github"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik.values.github}
-                            />
-                        </div>
-                        <div>
                             <b>facebook</b>:
                             <input
                                 name="facebook"
